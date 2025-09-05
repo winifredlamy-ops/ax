@@ -38,7 +38,7 @@ export const ReservationDetail: React.FC = () => {
 							<div className="detail-row">
 								<IconCalendar />
 								<span>
-									{isPending ? "08月10日 星期日 18:00-20:00" : "08月13日 星期三 13:00-14:00"}
+									{isPending ? "08月10日 星期日 18:00-20:00" : "08月07日 星期四 12:00-13:00"}
 								</span>
 							</div>
 							
@@ -50,7 +50,7 @@ export const ReservationDetail: React.FC = () => {
 							{!isPending && (
 								<div className="detail-row">
 									<IconPerson />
-									<span>导师E</span>
+									<span>导师B</span>
 								</div>
 							)}
 						</div>
