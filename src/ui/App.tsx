@@ -8,6 +8,7 @@ import { Admin } from './Admin'
 import { ReservationManagement } from './ReservationManagement'
 import { ReservationDetail } from './ReservationDetail'
 import { PublishCourse } from './PublishCourse'
+import { EditReservation } from './EditReservation'
 
 const Svg: React.FC<{ path: string; className?: string }> = ({ path, className }) => (
 	<svg className={className} viewBox="0 0 24 24" width="20" height="20" aria-hidden>
@@ -32,6 +33,7 @@ function useTitle() {
 	if (pathname.startsWith('/book')) return '订场'
 	if (pathname.startsWith('/events')) return '活动'
 	if (pathname.startsWith('/orders')) return '订单'
+	if (pathname.startsWith('/edit-reservation')) return '更改预约'
 	if (pathname.startsWith('/reservation')) return '我的约课'
 	return '首页'
 }
@@ -53,6 +55,7 @@ export const App: React.FC = () => {
 					<Route path="/mine/admin" element={<Admin />} />
 					<Route path="/reservation" element={<ReservationManagement />} />
 					<Route path="/reservation/:id" element={<ReservationDetail />} />
+					<Route path="/edit-reservation/:id" element={<EditReservation />} />
 					<Route path="/publish" element={<PublishCourse />} />
 					<Route path="*" element={<Navigate to="/home" replace />} />
 				</Routes>

@@ -69,7 +69,7 @@ export const ReservationDetail: React.FC = () => {
 			</div>
 			
 			<div className="detail-actions">
-				<button className="change-btn" onClick={() => navigate(`/publish?mode=edit&id=${id}`)}>
+				<button className="change-btn" onClick={() => navigate(`/edit-reservation/${id}`)}>
 					<IconEdit />
 					<span>更改预约</span>
 				</button>
