@@ -222,7 +222,7 @@ body {
 }
 
 .grid-label {
-	font-size: 9px;
+	font-size: 12px;
 	color: var(--fg);
 	text-align: center;
 	line-height: 1.1;
@@ -261,7 +261,7 @@ body {
 }
 
 .page.admin.compact .grid-label {
-	font-size: 8px;
+	font-size: 11px;
 } 
 
 .reservation-content {
@@ -273,7 +273,7 @@ body {
 	border-radius: 12px;
 	border: 1px solid var(--border);
 	box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-	margin-bottom: 16px;
+	margin-bottom: 8px;
 	overflow: hidden;
 }
 
@@ -281,7 +281,7 @@ body {
 	display: flex;
 	justify-content: space-between;
 	align-items: flex-start;
-	padding: 16px 16px 0;
+	padding: 12px 12px 0;
 }
 
 .title-section {
@@ -334,7 +334,7 @@ body {
 }
 
 .card-content {
-	padding: 12px 16px 16px;
+	padding: 8px 12px 12px;
 }
 
 .card-footer {
