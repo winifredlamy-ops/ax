@@ -861,3 +861,193 @@ body {
 	cursor: not-allowed;
 	background: #f9fafb;
 } 
+
+/* Reservation Detail New Layout */
+.reservation-detail-new {
+	background: var(--bg);
+	min-height: 100vh;
+}
+
+.detail-header {
+	background: #6DB06C;
+	color: white;
+	text-align: center;
+	padding: 16px;
+}
+
+.detail-title {
+	margin: 0;
+	font-size: 18px;
+	font-weight: 600;
+}
+
+.detail-content {
+	padding: 16px;
+}
+
+.detail-card {
+	background: #fff;
+	border-radius: 12px;
+	padding: 16px;
+	margin-bottom: 16px;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.course-status {
+	text-align: right;
+	margin-bottom: 12px;
+}
+
+.status-badge {
+	padding: 4px 8px;
+	border-radius: 12px;
+	font-size: 12px;
+	font-weight: 500;
+}
+
+.status-badge.accepted {
+	background: #d1fae5;
+	color: #059669;
+}
+
+.course-info {
+	text-align: left;
+}
+
+.course-title {
+	margin: 0 0 16px 0;
+	font-size: 16px;
+	font-weight: 600;
+	color: var(--fg);
+	line-height: 1.3;
+}
+
+.course-details {
+	margin-bottom: 20px;
+}
+
+.detail-row {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin-bottom: 8px;
+	font-size: 14px;
+	color: var(--fg);
+}
+
+.detail-row svg {
+	color: var(--muted);
+	flex-shrink: 0;
+}
+
+.instructor-section {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding: 12px;
+	background: #f8f9fa;
+	border-radius: 8px;
+}
+
+.instructor-avatar {
+	width: 40px;
+	height: 40px;
+	background: #e9ecef;
+	border-radius: 6px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+}
+
+.instructor-avatar svg {
+	color: var(--muted);
+}
+
+.instructor-intro p {
+	margin: 0;
+	font-size: 14px;
+	color: var(--muted);
+}
+
+.order-info {
+	background: #fff;
+	border-radius: 12px;
+	padding: 16px;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.order-row {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 8px;
+}
+
+.order-row:last-child {
+	margin-bottom: 0;
+}
+
+.order-label {
+	font-size: 13px;
+	color: var(--muted);
+}
+
+.order-value {
+	font-size: 13px;
+	color: var(--fg);
+	font-family: monospace;
+}
+
+.order-price {
+	font-size: 16px;
+	font-weight: 600;
+	color: var(--fg);
+}
+
+.detail-actions {
+	position: fixed;
+	bottom: 80px;
+	left: 0;
+	right: 0;
+	display: flex;
+	gap: 12px;
+	padding: 16px;
+	background: #fff;
+	border-top: 1px solid var(--border);
+	z-index: 10;
+}
+
+.change-btn, .confirm-btn {
+	flex: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	padding: 12px;
+	border: none;
+	border-radius: 8px;
+	font-size: 16px;
+	font-weight: 500;
+	cursor: pointer;
+	transition: all 0.2s;
+}
+
+.change-btn {
+	background: #90EE90;
+	color: #2d5a2d;
+	border: 1px solid #7dd87d;
+}
+
+.change-btn:hover {
+	background: #7dd87d;
+}
+
+.confirm-btn {
+	background: #e9ecef;
+	color: var(--fg);
+}
+
+.confirm-btn:hover {
+	background: #dee2e6;
+} 

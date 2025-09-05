@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 
 const Svg: React.FC<{ path: string; className?: string }> = ({ path, className }) => (
@@ -7,235 +7,81 @@ const Svg: React.FC<{ path: string; className?: string }> = ({ path, className }
 	</svg>
 )
 
-const IconChevronDown: React.FC = () => <Svg path="M6 9l6 6 6-6" />
-const IconChevronUp: React.FC = () => <Svg path="M18 15l-6-6-6 6" />
-const IconSave: React.FC = () => <Svg path="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2Z" />
-const IconSend: React.FC = () => <Svg path="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
-
-const dateOptions = [
-	"08月15日 星期四",
-	"08月16日 星期五", 
-	"08月17日 星期六",
-	"08月18日 星期日",
-	"08月19日 星期一",
-	"08月20日 星期二",
-	"08月21日 星期三"
-]
-
-const timeOptions = [
-	"09:00-10:00",
-	"10:00-11:00",
-	"11:00-12:00",
-	"13:00-14:00",
-	"14:00-15:00",
-	"15:00-16:00",
-	"16:00-17:00",
-	"17:00-18:00",
-	"18:00-19:00",
-	"19:00-20:00"
-]
-
-const storeOptions = [
-	"TT网球（福田中心店）",
-	"TT网球（南山中心店）"
-]
-
-const courseOptions = [
-	"1对1私教体验课-室内60分钟",
-	"1对2私教体验课-室内60分钟", 
-	"1对1导师体验课-室内60分钟",
-	"1对2导师体验课-室内60分钟",
-	"周末单次小团课体验-4人班/120分钟"
-]
-
-const remarkTemplates = [
-	"首次接触网球",
-	"掌握正反手基础知识但不熟练",
-	"正反手熟练",
-	"青少年学员"
-]
-
-const DropdownField: React.FC<{ 
-	label: string; 
-	placeholder: string; 
-	options: string[];
-	value: string;
-	onChange: (value: string) => void;
-	disabled?: boolean;
-}> = ({ label, placeholder, options, value, onChange, disabled = false }) => {
-	const [isOpen, setIsOpen] = useState(false)
-	
-	return (
-		<div className="form-field">
-			<label className="field-label">{label}</label>
-			<div className="field-input">
-				<div className={`input-select ${disabled ? 'disabled' : ''}`} onClick={() => !disabled && setIsOpen(!isOpen)}>
-					<input 
-						type="text" 
-						className="input-text" 
-						placeholder={placeholder}
-						value={value}
-						readOnly
-					/>
-					{!disabled && (isOpen ? <IconChevronUp /> : <IconChevronDown />)}
-				</div>
-				{isOpen && !disabled && (
-					<div className="dropdown-menu">
-						{options.map((option, index) => (
-							<div 
-								key={index}
-								className="dropdown-item"
-								onClick={() => {
-									onChange(option)
-									setIsOpen(false)
-								}}
-							>
-								{option}
-							</div>
-						))}
-					</div>
-				)}
-			</div>
-		</div>
-	)
-}
-
-const RadioField: React.FC<{ 
-	label: string; 
-	options: string[];
-	value: string;
-	onChange: (value: string) => void;
-	disabled?: boolean;
-}> = ({ label, options, value, onChange, disabled = false }) => {
-	return (
-		<div className="form-field">
-			<label className="field-label">{label}</label>
-			<div className="radio-group">
-				{options.map((option, index) => (
-					<label key={index} className={`radio-item ${disabled ? 'disabled' : ''}`}>
-						<input 
-							type="radio" 
-							name={label}
-							value={option}
-							checked={value === option}
-							onChange={(e) => !disabled && onChange(e.target.value)}
-							disabled={disabled}
-						/>
-						<span className="radio-label">{option}</span>
-					</label>
-				))}
-			</div>
-		</div>
-	)
-}
-
-const RemarkField: React.FC<{ 
-	label: string; 
-	placeholder: string;
-	value: string;
-	onChange: (value: string) => void;
-	disabled?: boolean;
-}> = ({ label, placeholder, value, onChange, disabled = false }) => {
-	return (
-		<div className="form-field">
-			<label className="field-label">{label}</label>
-			<div className="remark-content">
-				<div className="template-buttons">
-					{remarkTemplates.map((template, index) => (
-						<button 
-							key={index}
-							className={`template-btn ${disabled ? 'disabled' : ''}`}
-							onClick={() => !disabled && onChange(template)}
-							disabled={disabled}
-						>
-							{template}
-						</button>
-					))}
-				</div>
-				<textarea 
-					className={`input-textarea ${disabled ? 'disabled' : ''}`}
-					placeholder={placeholder}
-					value={value}
-					onChange={(e) => !disabled && onChange(e.target.value)}
-					rows={4}
-					disabled={disabled}
-				/>
-			</div>
-		</div>
-	)
-}
+const IconCalendar: React.FC = () => <Svg path="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" />
+const IconClock: React.FC = () => <Svg path="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zM12 6v6l4 2" />
+const IconMapPin: React.FC = () => <Svg path="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+const IconPerson: React.FC = () => <Svg path="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" />
+const IconImage: React.FC = () => <Svg path="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z" />
+const IconEdit: React.FC = () => <Svg path="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+const IconCheck: React.FC = () => <Svg path="M20 6L9 17l-5-5" />
 
 export const ReservationDetail: React.FC = () => {
 	const navigate = useNavigate()
 	const { id } = useParams()
-	const [selectedDate, setSelectedDate] = useState('')
-	const [selectedTime, setSelectedTime] = useState('')
-	const [selectedStore, setSelectedStore] = useState('')
-	const [selectedCourse, setSelectedCourse] = useState('')
-	const [remarks, setRemarks] = useState('')
-	
-	// Pre-fill data for the accepted reservation
-	useEffect(() => {
-		setSelectedDate('08月13日 星期三')
-		setSelectedTime('13:00-14:00')
-		setSelectedStore('TT网球（南山中心店）')
-		setSelectedCourse('1对2导师体验课-室内60分钟')
-		setRemarks('掌握正反手基础知识但不熟练')
-	}, [])
 	
 	return (
-		<div className="page publish-course">
-			<div className="publish-header">
-				<h1 className="publish-title">修改预约</h1>
+		<div className="page reservation-detail-new">
+			<div className="detail-header">
+				<h1 className="detail-title">我的约课</h1>
 			</div>
 			
-			<div className="publish-content">
-				<DropdownField 
-					label="日期选择" 
-					placeholder="请选择日期" 
-					options={dateOptions}
-					value={selectedDate}
-					onChange={setSelectedDate}
-					disabled={true}
-				/>
-				<DropdownField 
-					label="时间选择" 
-					placeholder="请选择时间" 
-					options={timeOptions}
-					value={selectedTime}
-					onChange={setSelectedTime}
-				/>
-				<RadioField 
-					label="网球门店" 
-					options={storeOptions}
-					value={selectedStore}
-					onChange={setSelectedStore}
-					disabled={true}
-				/>
-				<RadioField 
-					label="课程选择" 
-					options={courseOptions}
-					value={selectedCourse}
-					onChange={setSelectedCourse}
-					disabled={true}
-				/>
-				<RemarkField 
-					label="备注 (选填)" 
-					placeholder="输入学员情况、注意事项等"
-					value={remarks}
-					onChange={setRemarks}
-					disabled={true}
-				/>
+			<div className="detail-content">
+				<div className="detail-card">
+					<div className="course-status">
+						<span className="status-badge accepted">已接单</span>
+					</div>
+					
+					<div className="course-info">
+						<h2 className="course-title">1对2导师体验课-室内60分钟</h2>
+						
+						<div className="course-details">
+							<div className="detail-row">
+								<IconCalendar />
+								<span>08月13日 星期三 13:00-14:00</span>
+							</div>
+							
+							<div className="detail-row">
+								<IconMapPin />
+								<span>TT网球 (南山中心店)</span>
+							</div>
+							
+							<div className="detail-row">
+								<IconPerson />
+								<span>导师E</span>
+							</div>
+						</div>
+						
+						<div className="instructor-section">
+							<div className="instructor-avatar">
+								<IconImage />
+							</div>
+							<div className="instructor-intro">
+								<p>关于导师的三句话简介</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div className="order-info">
+					<div className="order-row">
+						<span className="order-label">订单号</span>
+						<span className="order-value">20250808165800000000</span>
+					</div>
+					<div className="order-row">
+						<span className="order-label">总价</span>
+						<span className="order-price">¥265</span>
+					</div>
+				</div>
 			</div>
 			
-			<div className="publish-actions">
-				<button className="save-btn" onClick={() => alert('保存')}>
-					<IconSave />
-					<span>保存</span>
+			<div className="detail-actions">
+				<button className="change-btn" onClick={() => navigate(`/publish?mode=edit&id=${id}`)}>
+					<IconEdit />
+					<span>更改预约</span>
 				</button>
-				<button className="publish-btn" onClick={() => navigate('/reservation')}>
-					<IconSend />
-					<span>确认修改</span>
+				<button className="confirm-btn" onClick={() => navigate('/reservation')}>
+					<IconCheck />
+					<span>取消订单</span>
 				</button>
 			</div>
 		</div>

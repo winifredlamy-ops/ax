@@ -217,9 +217,11 @@ export const PublishCourse: React.FC = () => {
 	
 	return (
 		<div className="page publish-course">
-			<div className="publish-header">
-				<h1 className="publish-title">{isEditMode ? '修改预约' : '发布课程'}</h1>
-			</div>
+			{!isEditMode && (
+				<div className="publish-header">
+					<h1 className="publish-title">发布课程</h1>
+				</div>
+			)}
 			
 			<div className="publish-content">
 				<DropdownField 
