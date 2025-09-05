@@ -83,7 +83,7 @@ const ReservationCard: React.FC<{ reservation: Reservation }> = ({ reservation }
 			
 			<div className="card-content">
 				<div className="info-row">
-					{reservation.status === 'pending' ? <IconLightning /> : <IconMapPin />}
+					<IconMapPin />
 					<span className="info-text">{reservation.location}</span>
 				</div>
 				
