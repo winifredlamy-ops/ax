@@ -13,7 +13,7 @@ const IconMapPin: React.FC = () => <Svg path="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9
 const IconPerson: React.FC = () => <Svg path="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" />
 const IconImage: React.FC = () => <Svg path="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z" />
 const IconEdit: React.FC = () => <Svg path="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
-const IconCheck: React.FC = () => <Svg path="M20 6L9 17l-5-5" />
+const IconX: React.FC = () => <Svg path="M18 6L6 18M6 6l12 12" />
 
 export const ReservationDetail: React.FC = () => {
 	const navigate = useNavigate()
@@ -21,15 +21,9 @@ export const ReservationDetail: React.FC = () => {
 	
 	return (
 		<div className="page reservation-detail-new">
-			<div className="detail-header">
-				<h1 className="detail-title">我的约课</h1>
-			</div>
-			
 			<div className="detail-content">
+				<h2 className="detail-title-simple">订单详情</h2>
 				<div className="detail-card">
-					<div className="course-status">
-						<span className="status-badge accepted">已接单</span>
-					</div>
 					
 					<div className="course-info">
 						<h2 className="course-title">1对2导师体验课-室内60分钟</h2>
@@ -53,10 +47,10 @@ export const ReservationDetail: React.FC = () => {
 						
 						<div className="instructor-section">
 							<div className="instructor-avatar">
-								<IconImage />
+								<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Ccircle cx='20' cy='20' r='20' fill='%23e0e7ff'/%3E%3Ccircle cx='20' cy='16' r='6' fill='%236366f1'/%3E%3Cpath d='M8 32c0-6.627 5.373-12 12-12s12 5.373 12 12' fill='%236366f1'/%3E%3C/svg%3E" alt="导师头像" />
 							</div>
 							<div className="instructor-intro">
-								<p>关于导师的三句话简介</p>
+								<p>资深网球教练，拥有10年教学经验。擅长初学者指导和技术提升。耐心细致，因材施教。</p>
 							</div>
 						</div>
 					</div>
@@ -80,7 +74,7 @@ export const ReservationDetail: React.FC = () => {
 					<span>更改预约</span>
 				</button>
 				<button className="confirm-btn" onClick={() => navigate('/reservation')}>
-					<IconCheck />
+					<IconX />
 					<span>取消订单</span>
 				</button>
 			</div>
