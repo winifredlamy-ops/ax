@@ -96,11 +96,7 @@ const ReservationCard: React.FC<{ reservation: Reservation }> = ({ reservation }
 				
 				<div className="card-footer">
 					<button className="details-btn" onClick={() => {
-						if (reservation.status === 'pending') {
-							navigate('/publish')
-						} else {
-							navigate(`/reservation/${reservation.id}`)
-						}
+						navigate(`/reservation/${reservation.id}`)
 					}}>
 						详情
 					</button>

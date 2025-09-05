@@ -19,6 +19,10 @@ export const ReservationDetail: React.FC = () => {
 	const navigate = useNavigate()
 	const { id } = useParams()
 	
+	// Determine if this is a pending or accepted order based on ID
+	// For demo purposes: IDs 1,2,3 are pending, 4,5 are accepted
+	const isPending = id && ['1', '2', '3'].includes(id)
+	
 	return (
 		<div className="page reservation-detail-new">
 			<div className="detail-content">
@@ -26,12 +30,16 @@ export const ReservationDetail: React.FC = () => {
 				<div className="detail-card">
 					
 					<div className="course-info">
-						<h2 className="course-title">1对2导师体验课-室内60分钟</h2>
+						<h2 className="course-title">
+							{isPending ? "周末单次小团课体验-4人班/120分钟" : "1对2导师体验课-室内60分钟"}
+						</h2>
 						
 						<div className="course-details">
 							<div className="detail-row">
 								<IconCalendar />
-								<span>08月13日 星期三 13:00-14:00</span>
+								<span>
+									{isPending ? "08月10日 星期日 18:00-20:00" : "08月13日 星期三 13:00-14:00"}
+								</span>
 							</div>
 							
 							<div className="detail-row">
@@ -39,20 +47,24 @@ export const ReservationDetail: React.FC = () => {
 								<span>TT网球 (南山中心店)</span>
 							</div>
 							
-							<div className="detail-row">
-								<IconPerson />
-								<span>导师E</span>
-							</div>
+							{!isPending && (
+								<div className="detail-row">
+									<IconPerson />
+									<span>导师E</span>
+								</div>
+							)}
 						</div>
 						
-						<div className="instructor-section">
-							<div className="instructor-avatar">
-								<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Ccircle cx='20' cy='20' r='20' fill='%23e0e7ff'/%3E%3Ccircle cx='20' cy='16' r='6' fill='%236366f1'/%3E%3Cpath d='M8 32c0-6.627 5.373-12 12-12s12 5.373 12 12' fill='%236366f1'/%3E%3C/svg%3E" alt="导师头像" />
+						{!isPending && (
+							<div className="instructor-section">
+								<div className="instructor-avatar">
+									<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Ccircle cx='20' cy='20' r='20' fill='%23e0e7ff'/%3E%3Ccircle cx='20' cy='16' r='6' fill='%236366f1'/%3E%3Cpath d='M8 32c0-6.627 5.373-12 12-12s12 5.373 12 12' fill='%236366f1'/%3E%3C/svg%3E" alt="导师头像" />
+								</div>
+								<div className="instructor-intro">
+									<p>资深网球教练，拥有10年教学经验。擅长初学者指导和技术提升。耐心细致，因材施教。</p>
+								</div>
 							</div>
-							<div className="instructor-intro">
-								<p>资深网球教练，拥有10年教学经验。擅长初学者指导和技术提升。耐心细致，因材施教。</p>
-							</div>
-						</div>
+						)}
 					</div>
 				</div>
 				
@@ -69,14 +81,29 @@ export const ReservationDetail: React.FC = () => {
 			</div>
 			
 			<div className="detail-actions">
-				<button className="change-btn" onClick={() => navigate(`/edit-reservation/${id}`)}>
-					<IconEdit />
-					<span>更改预约</span>
-				</button>
-				<button className="confirm-btn" onClick={() => navigate('/reservation')}>
-					<IconX />
-					<span>取消订单</span>
-				</button>
+				{isPending ? (
+					<>
+						<button className="change-btn" onClick={() => navigate('/publish')}>
+							<IconEdit />
+							<span>更改预约</span>
+						</button>
+						<button className="confirm-btn" onClick={() => navigate('/reservation')}>
+							<IconX />
+							<span>取消订单</span>
+						</button>
+					</>
+				) : (
+					<>
+						<button className="change-btn" onClick={() => navigate(`/edit-reservation/${id}`)}>
+							<IconEdit />
+							<span>更改预约</span>
+						</button>
+						<button className="confirm-btn" onClick={() => navigate('/reservation')}>
+							<IconX />
+							<span>取消订单</span>
+						</button>
+					</>
+				)}
 			</div>
 		</div>
 	)
