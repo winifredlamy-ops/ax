@@ -1,5 +1,6 @@
 import React from 'react'
 import { Routes, Route, NavLink, Navigate, useLocation } from 'react-router-dom'
+import './App.css'
 import { Home } from './Home'
 import { Mine } from './Mine'
 import { Messages } from './Messages'

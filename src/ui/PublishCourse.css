@@ -1,0 +1,558 @@
+/* PublishCourse组件相关样式 */
+.publish-course {
+	padding: 0;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+
+.publish-header {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 16px 20px;
+	background: #fff;
+	border-bottom: 1px solid var(--border);
+}
+
+.publish-title {
+	margin: 0;
+	font-size: 22px;
+	font-weight: 600;
+	color: #4a5568;
+}
+
+.publish-content {
+	flex: 1;
+	padding: 12px 4px;
+	overflow-y: auto;
+}
+
+.form-field {
+	margin-bottom: 16px;
+}
+
+.field-label {
+	display: block;
+	font-size: 16px;
+	font-weight: 500;
+	color: var(--fg);
+	margin-bottom: 6px;
+}
+
+.field-input {
+	position: relative;
+}
+
+.input-select {
+	position: relative;
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+}
+
+.input-text {
+	width: 100%;
+	padding: 12px 40px 12px 12px;
+	border: 1px solid var(--border);
+	border-radius: 8px;
+	font-size: 16px;
+	background: #fff;
+	color: var(--fg);
+	cursor: pointer;
+}
+
+.input-text::placeholder {
+	color: var(--muted);
+}
+
+.input-select svg {
+	position: absolute;
+	right: 12px;
+	color: var(--muted);
+	pointer-events: none;
+}
+
+.dropdown-menu {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	right: 0;
+	background: #fff;
+	border: 1px solid var(--border);
+	border-radius: 8px;
+	box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+	z-index: 1000;
+	max-height: 200px;
+	overflow-y: auto;
+	margin-top: 4px;
+}
+
+.dropdown-item {
+	padding: 12px 16px;
+	font-size: 16px;
+	color: var(--fg);
+	cursor: pointer;
+	border-bottom: 1px solid #f3f4f6;
+}
+
+.dropdown-item:last-child {
+	border-bottom: none;
+}
+
+.dropdown-item:hover {
+	background: #f9fafb;
+}
+
+.input-textarea {
+	width: 100%;
+	padding: 12px;
+	border: 1px solid var(--border);
+	border-radius: 8px;
+	font-size: 16px;
+	background: #fff;
+	color: var(--fg);
+	resize: vertical;
+	min-height: 100px;
+	font-family: inherit;
+}
+
+.input-textarea::placeholder {
+	color: var(--muted);
+}
+
+.publish-actions {
+	display: flex;
+	gap: 12px;
+	padding: 12px 4px;
+	background: #fff;
+	border-top: 1px solid var(--border);
+}
+
+.save-btn, .publish-btn {
+	flex: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	padding: 14px;
+	border: none;
+	border-radius: 8px;
+	font-size: 16px;
+	font-weight: 600;
+	cursor: pointer;
+	transition: all 0.2s;
+}
+
+.save-btn {
+	background: #f3f4f6;
+	color: var(--muted);
+}
+
+.save-btn:hover {
+	background: #e5e7eb;
+}
+
+.publish-btn {
+	background: #3b82f6;
+	color: white;
+}
+
+.publish-btn:hover {
+	background: #2563eb;
+}
+
+.save-btn svg, .publish-btn svg {
+	width: 20px;
+	height: 20px;
+}
+
+.radio-group {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.radio-item {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	cursor: pointer;
+	padding: 12px 16px;
+	border: 1px solid var(--border);
+	border-radius: 8px;
+	background: #fff;
+	transition: all 0.2s;
+}
+
+.radio-item:hover {
+	background: #f9fafb;
+	border-color: var(--primary);
+}
+
+.radio-item input[type="radio"] {
+	width: 18px;
+	height: 18px;
+	margin: 0;
+	accent-color: var(--primary);
+}
+
+.radio-label {
+	font-size: 16px;
+	color: var(--fg);
+	flex: 1;
+}
+
+.radio-item:has(input[type="radio"]:checked) {
+	background: #f0fdf4;
+	border-color: var(--primary);
+}
+
+.remark-content {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.remark-templates {
+	margin-top: 8px;
+}
+
+.template-label {
+	font-size: 14px;
+	color: var(--muted);
+	margin-bottom: 8px;
+}
+
+.template-buttons {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+}
+
+.template-btn {
+	padding: 6px 12px;
+	border: 1px solid var(--border);
+	border-radius: 16px;
+	background: #fff;
+	color: var(--fg);
+	font-size: 14px;
+	cursor: pointer;
+	transition: all 0.2s;
+}
+
+.template-btn:hover {
+	background: var(--primary);
+	color: white;
+	border-color: var(--primary);
+}
+
+.input-select.disabled {
+	opacity: 0.6;
+	cursor: not-allowed;
+	background: #f9fafb;
+}
+
+.radio-item.disabled {
+	opacity: 0.6;
+	cursor: not-allowed;
+	background: #f9fafb;
+}
+
+.radio-item.disabled input[type="radio"] {
+	cursor: not-allowed;
+}
+
+.template-btn.disabled {
+	opacity: 0.6;
+	cursor: not-allowed;
+	background: #f9fafb;
+}
+
+.input-textarea.disabled {
+	opacity: 0.6;
+	cursor: not-allowed;
+	background: #f9fafb;
+}
+
+/* 学员信息字段样式 */
+.student-info-fields {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	margin-bottom: 8px;
+}
+
+/* 学员信息字段内的表单字段间距更紧凑 */
+.student-info-fields .form-field {
+	margin-bottom: 8px;
+}
+
+.field-hint {
+	font-size: 12px;
+	color: #666666;
+	margin-top: 4px;
+	padding-left: 2px;
+}
+
+/* 日历样式 */
+.calendar-container {
+	background: #ffffff;
+	border: 1px solid #e2e8f0;
+	border-radius: 8px;
+	padding: 8px;
+}
+
+.calendar-container.disabled {
+	opacity: 0.6;
+	pointer-events: none;
+}
+
+.calendar-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 8px;
+}
+
+.calendar-nav-btn {
+	background: none;
+	border: none;
+	padding: 4px;
+	cursor: pointer;
+	border-radius: 4px;
+	transition: background 0.2s ease;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.calendar-nav-btn:hover {
+	background: #f1f5f9;
+}
+
+.calendar-nav-btn.disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
+}
+
+.calendar-nav-btn.disabled:hover {
+	background: none;
+}
+
+.calendar-month-year {
+	font-size: 16px;
+	font-weight: 600;
+	color: #374151;
+}
+
+.calendar-weekdays {
+	display: grid;
+	grid-template-columns: repeat(7, 1fr);
+	gap: 1px;
+	margin-bottom: 4px;
+}
+
+.calendar-weekday {
+	text-align: center;
+	font-size: 12px;
+	font-weight: 500;
+	color: #6b7280;
+	padding: 4px 2px;
+}
+
+.calendar-days {
+	display: grid;
+	grid-template-columns: repeat(7, 1fr);
+	row-gap: 1px;
+	column-gap: 2px;
+}
+
+.calendar-day {
+	aspect-ratio: 1;
+	border: none;
+	background: none;
+	cursor: pointer;
+	border-radius: 3px;
+	font-size: 13px;
+	font-weight: 500;
+	transition: all 0.2s ease;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 20px;
+}
+
+.calendar-day:hover:not(.disabled) {
+	background: #f1f5f9;
+}
+
+.calendar-day.selected {
+	background: #3b82f6;
+	color: #ffffff;
+}
+
+.calendar-day.selected:hover {
+	background: #2563eb;
+}
+
+.calendar-day.other-month {
+	color: #d1d5db;
+}
+
+.calendar-day.disabled {
+	color: #d1d5db;
+	cursor: not-allowed;
+}
+
+.calendar-day.disabled:hover {
+	background: none;
+}
+
+/* Publish Course Time Venue Grid Styles */
+.publish-course .booking-grid {
+	margin: 16px 4px;
+	background: white;
+	border-radius: 12px;
+	overflow: hidden;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+	border: 1px solid #e0e0e0;
+}
+
+.publish-course .grid-header {
+	display: grid;
+	grid-template-columns: 70px repeat(6, 1fr);
+	background: #f8f9fa;
+	border-bottom: 1px solid #e0e0e0;
+}
+
+.publish-course .time-header, 
+.publish-course .venue-header {
+	padding: 10px 6px;
+	text-align: center;
+	font-size: 13px;
+	font-weight: 600;
+	color: var(--fg);
+	border-right: 1px solid #e0e0e0;
+}
+
+.publish-course .time-header {
+	background: #f0f0f0;
+}
+
+.publish-course .venue-header:last-child {
+	border-right: none;
+}
+
+.publish-course .grid-row {
+	display: grid;
+	grid-template-columns: 70px repeat(6, 1fr);
+	border-bottom: 1px solid #f0f0f0;
+}
+
+.publish-course .grid-row:last-child {
+	border-bottom: none;
+}
+
+.publish-course .time-cell {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 6px 2px;
+	background: #f8f9fa;
+	border-right: 1px solid #e0e0e0;
+	font-size: 11px;
+	color: var(--fg);
+	text-align: center;
+	line-height: 1.1;
+}
+
+.publish-course .venue-cell {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 6px 4px;
+	border-right: 1px solid #f0f0f0;
+	cursor: pointer;
+	min-height: 45px;
+	transition: all 0.2s;
+}
+
+.publish-course .venue-cell:last-child {
+	border-right: none;
+}
+
+.publish-course .venue-cell.selected {
+	background: #90EE90;
+}
+
+.publish-course .venue-cell.unavailable {
+	background: #cccccc;
+	cursor: not-allowed;
+}
+
+/* 可选择场地：白色背景，黑色字体 */
+.publish-course .available-slot {
+	font-size: 14px;
+	font-weight: 600;
+	color: #000000;
+	background: #ffffff;
+	padding: 8px;
+	border-radius: 4px;
+}
+
+/* 已选中场地的可选项：透明背景 */
+.publish-course .venue-cell.selected .available-slot {
+	background: transparent;
+	color: #2d5a2d;
+}
+
+/* 不可选择场地：灰色背景 */
+.publish-course .booked-slot {
+	background: #cccccc;
+	padding: 8px;
+	border-radius: 4px;
+	width: 100%;
+	height: 100%;
+}
+
+.publish-course .unavailable-text {
+	font-size: 14px;
+	color: #666666;
+	font-weight: 600;
+	text-align: center;
+}
+
+/* 24小时时段网格滚动样式 */
+.publish-course .booking-grid {
+	max-height: 350px;
+	overflow-y: auto;
+	border: 1px solid #e0e0e0;
+}
+
+/* 固定表头 */
+.publish-course .grid-header {
+	position: sticky;
+	top: 0;
+	z-index: 5;
+	box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* 滚动条样式 */
+.publish-course .booking-grid::-webkit-scrollbar {
+	width: 6px;
+}
+
+.publish-course .booking-grid::-webkit-scrollbar-track {
+	background: #f1f1f1;
+	border-radius: 3px;
+}
+
+.publish-course .booking-grid::-webkit-scrollbar-thumb {
+	background: #c1c1c1;
+	border-radius: 3px;
+}
+
+.publish-course .booking-grid::-webkit-scrollbar-thumb:hover {
+	background: #a8a8a8;
+}

@@ -1,0 +1,108 @@
+/* Mine组件相关样式 */
+.card.balance {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 16px;
+	background: linear-gradient(180deg, #f7fbf9 0%, #ffffff 100%);
+}
+
+.balance-left { 
+	color: var(--muted); 
+}
+
+.balance-right { 
+	color: var(--primary); 
+	font-weight: 700; 
+}
+
+.balance-right .currency { 
+	margin-right: 2px; 
+}
+
+.balance-right .amount { 
+	font-size: 22px; 
+}
+
+.list { 
+	list-style: none; 
+	padding: 0; 
+	margin: 0; 
+}
+
+.list-group .list-item + .list-item { 
+	border-top: 1px solid var(--border); 
+}
+
+.list-item {
+	min-height: 48px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 14px 12px;
+	font-size: 16px;
+	width: 100%;
+	background: transparent;
+	border: 0;
+	text-align: left;
+	cursor: pointer;
+	outline: none;
+}
+
+.list-item:hover { 
+	background-color: rgba(0,0,0,0.02); 
+}
+
+.list-item:active { 
+	background-color: rgba(0,0,0,0.05); 
+}
+
+.list-item .left { 
+	display: inline-flex; 
+	align-items: center; 
+	gap: 10px; 
+}
+
+.icon { 
+	color: #6b7280; 
+}
+
+.chevron { 
+	color: #9ca3af; 
+}
+
+.list-item.danger { 
+	color: #e74c3c; 
+	font-weight: 600; 
+}
+
+.section-title {
+	margin: 12px 4px 6px;
+	color: var(--muted);
+	font-size: 12px;
+}
+
+.page.compact {
+	padding: 0;
+	height: 100vh;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+}
+
+.page.compact .card {
+	margin: 4px 0;
+}
+
+.page.compact .list-item {
+	min-height: 44px;
+	padding: 12px;
+}
+
+.page.compact .section-title {
+	margin: 8px 4px 4px;
+}
+
+.page.compact .card.balance {
+	padding: 14px;
+}

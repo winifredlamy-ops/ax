@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import './PublishCourse.css'
 
 // 定义场地数据类型
 interface Venue {

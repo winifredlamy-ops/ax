@@ -1,0 +1,13 @@
+/* Home组件相关样式 */
+.page {
+	/* 基础页面样式在global.css中定义 */
+}
+
+.page-title { 
+	margin: 0 0 12px; 
+	font-size: 20px; 
+}
+
+.muted { 
+	color: var(--muted); 
+}

@@ -1,0 +1,95 @@
+/* Admin组件相关样式 */
+.admin-content {
+	padding: 8px 4px;
+}
+
+.admin-section {
+	margin-bottom: 12px;
+}
+
+.admin-section .section-title {
+	margin: 0 0 6px;
+	color: var(--fg);
+	font-size: 13px;
+	font-weight: 600;
+}
+
+.grid-container {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+	gap: 8px;
+	background: #fafafa;
+	border-radius: 6px;
+	padding: 8px;
+}
+
+.grid-item {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	background: #fff;
+	border: 1px solid var(--border);
+	border-radius: 4px;
+	padding: 6px 4px;
+	cursor: pointer;
+	transition: all 0.2s;
+	min-height: 45px;
+}
+
+.grid-item:hover {
+	transform: translateY(-1px);
+	box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.grid-item:active {
+	transform: translateY(0);
+}
+
+.grid-icon {
+	margin-bottom: 4px;
+	color: var(--fg);
+}
+
+.grid-label {
+	font-size: 12px;
+	color: var(--fg);
+	text-align: center;
+	line-height: 1.1;
+	font-weight: 500;
+}
+
+.page.admin.compact {
+	padding: 0;
+	height: 100vh;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+}
+
+.page.admin.compact .admin-content {
+	padding: 6px 4px;
+}
+
+.page.admin.compact .admin-section {
+	margin-bottom: 8px;
+}
+
+.page.admin.compact .admin-section .section-title {
+	margin: 0 0 4px;
+	font-size: 12px;
+}
+
+.page.admin.compact .grid-container {
+	gap: 6px;
+	padding: 6px;
+}
+
+.page.admin.compact .grid-item {
+	min-height: 40px;
+	padding: 4px 2px;
+}
+
+.page.admin.compact .grid-label {
+	font-size: 11px;
+}

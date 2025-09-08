@@ -1,5 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import './TopBar.css'
 
 const Svg: React.FC<{ path: string; className?: string }> = ({ path, className }) => (
 	<svg className={className} viewBox="0 0 24 24" width="20" height="20" aria-hidden>
