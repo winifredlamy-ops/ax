@@ -41,6 +41,58 @@ body {
 	height: 4px; 
 }
 
+/* 复选框组样式 */
+.checkbox-group {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.checkbox-item {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	cursor: pointer;
+	padding: 12px 16px;
+	border: 1px solid var(--border);
+	border-radius: 8px;
+	background: #fff;
+	transition: all 0.2s;
+}
+
+.checkbox-item:hover {
+	background: #f9fafb;
+	border-color: var(--primary);
+}
+
+.checkbox-item input[type="checkbox"] {
+	width: 18px;
+	height: 18px;
+	margin: 0;
+	accent-color: var(--primary);
+}
+
+.checkbox-label {
+	font-size: 16px;
+	color: var(--fg);
+	flex: 1;
+}
+
+.checkbox-item:has(input[type="checkbox"]:checked) {
+	background: #f0fdf4;
+	border-color: var(--primary);
+}
+
+.checkbox-item.disabled {
+	opacity: 0.6;
+	cursor: not-allowed;
+	background: #f9fafb;
+}
+
+.checkbox-item.disabled input[type="checkbox"] {
+	cursor: not-allowed;
+}
+
 .section-title {
 	margin: 12px 4px 6px;
 	color: var(--muted);

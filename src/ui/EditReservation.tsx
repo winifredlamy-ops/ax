@@ -103,28 +103,39 @@ const DropdownField: React.FC<{
 	)
 }
 
-const RadioField: React.FC<{ 
+const CheckboxField: React.FC<{ 
 	label: string; 
 	options: string[];
-	value: string;
-	onChange: (value: string) => void;
+	values: string[];
+	onChange: (values: string[]) => void;
 	disabled?: boolean;
-}> = ({ label, options, value, onChange, disabled = false }) => {
+}> = ({ label, options, values, onChange, disabled = false }) => {
+	const handleCheckboxChange = (option: string) => {
+		if (disabled) return;
+		
+		if (values.includes(option)) {
+			// Remove option from selection
+			onChange(values.filter(v => v !== option));
+		} else {
+			// Add option to selection
+			onChange([...values, option]);
+		}
+	};
+
 	return (
 		<div className="form-field">
 			<label className="field-label">{label}</label>
-			<div className="radio-group">
+			<div className="checkbox-group">
 				{options.map((option, index) => (
-					<label key={index} className={`radio-item ${disabled ? 'disabled' : ''}`}>
+					<label key={index} className={`checkbox-item ${disabled ? 'disabled' : ''}`}>
 						<input 
-							type="radio" 
-							name={label}
+							type="checkbox" 
 							value={option}
-							checked={value === option}
-							onChange={(e) => !disabled && onChange(e.target.value)}
+							checked={values.includes(option)}
+							onChange={() => handleCheckboxChange(option)}
 							disabled={disabled}
 						/>
-						<span className="radio-label">{option}</span>
+						<span className="checkbox-label">{option}</span>
 					</label>
 				))}
 			</div>
@@ -364,25 +375,36 @@ const CalendarField: React.FC<{
 const CoachSelectionField: React.FC<{ 
 	label: string; 
 	coaches: Array<{id: string, name: string}>;
-	selectedCoach: string;
-	onCoachSelect: (coachId: string) => void;
+	selectedCoaches: string[];
+	onCoachSelect: (coachIds: string[]) => void;
 	disabled?: boolean;
-}> = ({ label, coaches, selectedCoach, onCoachSelect, disabled = false }) => {
+}> = ({ label, coaches, selectedCoaches, onCoachSelect, disabled = false }) => {
+	const handleCoachChange = (coachId: string) => {
+		if (disabled) return;
+		
+		if (selectedCoaches.includes(coachId)) {
+			// Remove coach from selection
+			onCoachSelect(selectedCoaches.filter(id => id !== coachId));
+		} else {
+			// Add coach to selection
+			onCoachSelect([...selectedCoaches, coachId]);
+		}
+	};
+
 	return (
 		<div className="form-field">
 			<label className="field-label">{label}</label>
-			<div className="radio-group">
+			<div className="checkbox-group">
 				{coaches.map((coach) => (
-					<label key={coach.id} className={`radio-item ${disabled ? 'disabled' : ''}`}>
+					<label key={coach.id} className={`checkbox-item ${disabled ? 'disabled' : ''}`}>
 						<input 
-							type="radio" 
-							name="coach-selection"
+							type="checkbox" 
 							value={coach.id}
-							checked={selectedCoach === coach.id}
-							onChange={(e) => !disabled && onCoachSelect(e.target.value)}
+							checked={selectedCoaches.includes(coach.id)}
+							onChange={() => handleCoachChange(coach.id)}
 							disabled={disabled}
 						/>
-						<span className="radio-label">{coach.name}</span>
+						<span className="checkbox-label">{coach.name}</span>
 					</label>
 				))}
 			</div>
@@ -395,9 +417,9 @@ export const EditReservation: React.FC = () => {
 	const { id } = useParams()
 	const [selectedDate, setSelectedDate] = useState('')
 	const [selectedTime, setSelectedTime] = useState('')
-	const [selectedStore, setSelectedStore] = useState('')
-	const [selectedCourse, setSelectedCourse] = useState('')
-	const [selectedCoach, setSelectedCoach] = useState('')
+	const [selectedStores, setSelectedStores] = useState<string[]>([])
+	const [selectedCourses, setSelectedCourses] = useState<string[]>([])
+	const [selectedCoaches, setSelectedCoaches] = useState<string[]>([])
 	const [studentPhone, setStudentPhone] = useState('')
 	const [studentNickname, setStudentNickname] = useState('')
 	const [remarks, setRemarks] = useState('')
@@ -457,19 +479,20 @@ export const EditReservation: React.FC = () => {
 	useEffect(() => {
 		setSelectedDate('08月13日 星期三')
 		setSelectedTime('13:00-14:00')
-		setSelectedStore('TT网球（南山中心店）')
-		setSelectedCourse('1对2导师体验课-室内60分钟')
+		setSelectedStores(['TT网球（南山中心店）'])
+		setSelectedCourses(['1对2导师体验课-室内60分钟'])
+		setSelectedCoaches(['2']) // 选中"李"教练
 		setRemarks('掌握正反手基础知识但不熟练')
 	}, [])
 	
 	return (
 		<div className="page publish-course">
 			<div className="publish-content">
-				<RadioField 
+				<CheckboxField 
 					label="网球门店" 
 					options={storeOptions}
-					value={selectedStore}
-					onChange={setSelectedStore}
+					values={selectedStores}
+					onChange={setSelectedStores}
 					disabled={true}
 				/>
 				
@@ -486,19 +509,19 @@ export const EditReservation: React.FC = () => {
 					value={selectedTime}
 					onChange={setSelectedTime}
 				/>
-				<RadioField 
+				<CheckboxField 
 					label="课程选择" 
 					options={courseOptions}
-					value={selectedCourse}
-					onChange={setSelectedCourse}
+					values={selectedCourses}
+					onChange={setSelectedCourses}
 					disabled={true}
 				/>
 				
 				<CoachSelectionField 
 					label="教练选择 (选填)"
 					coaches={coachDatabase}
-					selectedCoach={selectedCoach}
-					onCoachSelect={setSelectedCoach}
+					selectedCoaches={selectedCoaches}
+					onCoachSelect={setSelectedCoaches}
 					disabled={true}
 				/>
 				
