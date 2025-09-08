@@ -23,7 +23,7 @@ body {
 .app-content {
 	flex: 1 1 auto;
 	overflow: auto;
-	padding: 12px 16px 80px;
+	padding: 12px 4px 80px;
 }
 
 .topbar {
@@ -170,7 +170,7 @@ body {
 .section-gap { height: 4px; } 
 
 .admin-content {
-	padding: 8px;
+	padding: 8px 4px;
 }
 
 .admin-section {
@@ -238,7 +238,7 @@ body {
 }
 
 .page.admin.compact .admin-content {
-	padding: 6px;
+	padding: 6px 4px;
 }
 
 .page.admin.compact .admin-section {
@@ -265,7 +265,7 @@ body {
 } 
 
 .reservation-content {
-	padding: 16px;
+	padding: 16px 4px;
 }
 
 .reservation-card {
@@ -394,8 +394,8 @@ body {
 .new-reservation {
 	position: fixed;
 	bottom: 80px;
-	left: 16px;
-	right: 16px;
+	left: 4px;
+	right: 4px;
 }
 
 .new-btn {
@@ -449,7 +449,7 @@ body {
 
 .publish-content {
 	flex: 1;
-	padding: 20px;
+	padding: 20px 4px;
 	overflow-y: auto;
 }
 
@@ -549,7 +549,7 @@ body {
 .publish-actions {
 	display: flex;
 	gap: 12px;
-	padding: 20px;
+	padding: 20px 4px;
 	background: #fff;
 	border-top: 1px solid var(--border);
 }
@@ -882,7 +882,7 @@ body {
 }
 
 .detail-content {
-	padding: 8px 2px;
+	padding: 8px 4px;
 }
 
 .detail-title-simple {
@@ -1025,7 +1025,7 @@ body {
 	right: 0;
 	display: flex;
 	gap: 12px;
-	padding: 16px;
+	padding: 16px 4px;
 	background: #fff;
 	border-top: 1px solid var(--border);
 	z-index: 10;
@@ -1086,7 +1086,7 @@ body {
 
 .booking-form {
 	background: white;
-	margin: 8px 16px;
+	margin: 8px 4px;
 	border-radius: 12px;
 	overflow: hidden;
 	box-shadow: 0 1px 3px rgba(0,0,0,0.1);
@@ -1172,20 +1172,18 @@ body {
 }
 
 .booking-grid {
-	margin: 8px 16px;
+	margin: 8px 4px;
 	background: white;
 	border-radius: 12px;
-	overflow-x: auto;
-	overflow-y: visible;
+	overflow: hidden;
 	box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
 .grid-header {
 	display: grid;
-	grid-template-columns: 70px repeat(6, minmax(100px, 1fr));
+	grid-template-columns: 70px repeat(6, 1fr);
 	background: #f8f9fa;
 	border-bottom: 1px solid #e0e0e0;
-	min-width: 670px;
 }
 
 .time-header, .venue-header {
@@ -1207,9 +1205,8 @@ body {
 
 .grid-row {
 	display: grid;
-	grid-template-columns: 70px repeat(6, minmax(100px, 1fr));
+	grid-template-columns: 70px repeat(6, 1fr);
 	border-bottom: 1px solid #f0f0f0;
-	min-width: 670px;
 }
 
 .grid-row:last-child {
@@ -1249,49 +1246,45 @@ body {
 }
 
 .venue-cell.unavailable {
-	background: #f8f9fa;
+	background: #cccccc;
 	cursor: not-allowed;
 }
 
 .available-slot {
 	font-size: 14px;
 	font-weight: 600;
-	color: var(--fg);
+	color: #000000;
+	background: #ffffff;
+	padding: 8px;
+	border-radius: 4px;
+}
+
+/* 已选中场地的可选项：透明背景 */
+.venue-cell.selected .available-slot {
+	background: transparent;
+	color: #2d5a2d;
 }
 
 .booked-slot {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	gap: 4px;
-}
-
-.booked-badge {
-	background: #ff4444;
-	color: white;
-	padding: 2px 6px;
+	background: #cccccc;
+	padding: 8px;
 	border-radius: 4px;
-	font-size: 10px;
-	font-weight: 500;
-}
-
-.booked-contact {
-	font-size: 11px;
-	color: #888;
-	text-align: center;
-	line-height: 1.2;
+	width: 100%;
+	height: 100%;
 }
 
 .unavailable-text {
-	font-size: 12px;
-	color: #999;
+	font-size: 14px;
+	color: #666666;
+	font-weight: 600;
+	text-align: center;
 }
 
 .submit-section {
 	position: fixed;
 	bottom: 80px;
-	left: 16px;
-	right: 16px;
+	left: 4px;
+	right: 4px;
 	z-index: 10;
 }
 
@@ -1321,7 +1314,7 @@ body {
 
 /* Publish Course Time Venue Grid Styles */
 .publish-course .booking-grid {
-	margin: 16px 0;
+	margin: 16px 4px;
 	background: white;
 	border-radius: 12px;
 	overflow: hidden;
@@ -1331,10 +1324,9 @@ body {
 
 .publish-course .grid-header {
 	display: grid;
-	grid-template-columns: 70px repeat(6, minmax(100px, 1fr));
+	grid-template-columns: 70px repeat(6, 1fr);
 	background: #f8f9fa;
 	border-bottom: 1px solid #e0e0e0;
-	min-width: 670px;
 }
 
 .publish-course .time-header, 
@@ -1357,9 +1349,8 @@ body {
 
 .publish-course .grid-row {
 	display: grid;
-	grid-template-columns: 70px repeat(6, minmax(100px, 1fr));
+	grid-template-columns: 70px repeat(6, 1fr);
 	border-bottom: 1px solid #f0f0f0;
-	min-width: 670px;
 }
 
 .publish-course .grid-row:last-child {
@@ -1399,54 +1390,47 @@ body {
 }
 
 .publish-course .venue-cell.unavailable {
-	background: #f8f9fa;
+	background: #cccccc;
 	cursor: not-allowed;
 }
 
-/* 可选择场地：黑色字体 */
+/* 可选择场地：白色背景，黑色字体 */
 .publish-course .available-slot {
 	font-size: 14px;
 	font-weight: 600;
 	color: #000000;
-}
-
-/* 不可选择场地：灰色字体 */
-.publish-course .booked-slot {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	gap: 4px;
-}
-
-.publish-course .booked-badge {
-	background: #ff4444;
-	color: white;
-	padding: 2px 6px;
+	background: #ffffff;
+	padding: 8px;
 	border-radius: 4px;
-	font-size: 10px;
-	font-weight: 500;
 }
 
-.publish-course .booked-contact {
-	font-size: 11px;
-	color: #999999;
-	text-align: center;
-	line-height: 1.2;
+/* 已选中场地的可选项：透明背景 */
+.publish-course .venue-cell.selected .available-slot {
+	background: transparent;
+	color: #2d5a2d;
+}
+
+/* 不可选择场地：灰色背景 */
+.publish-course .booked-slot {
+	background: #cccccc;
+	padding: 8px;
+	border-radius: 4px;
+	width: 100%;
+	height: 100%;
 }
 
 .publish-course .unavailable-text {
 	font-size: 14px;
-	color: #999999;
+	color: #666666;
 	font-weight: 600;
+	text-align: center;
 }
 
 /* 24小时时段网格滚动样式 */
 .publish-course .booking-grid {
 	max-height: 350px;
 	overflow-y: auto;
-	overflow-x: auto;
 	border: 1px solid #e0e0e0;
-	min-width: 100%;
 }
 
 /* 固定表头 */
@@ -1476,39 +1460,3 @@ body {
 	background: #a8a8a8;
 }
 
-/* 水平滚动条样式 */
-.booking-grid::-webkit-scrollbar:horizontal {
-	height: 8px;
-}
-
-.booking-grid::-webkit-scrollbar-track:horizontal {
-	background: #f1f1f1;
-	border-radius: 4px;
-}
-
-.booking-grid::-webkit-scrollbar-thumb:horizontal {
-	background: #c1c1c1;
-	border-radius: 4px;
-}
-
-.booking-grid::-webkit-scrollbar-thumb:horizontal:hover {
-	background: #a8a8a8;
-}
-
-.publish-course .booking-grid::-webkit-scrollbar:horizontal {
-	height: 8px;
-}
-
-.publish-course .booking-grid::-webkit-scrollbar-track:horizontal {
-	background: #f1f1f1;
-	border-radius: 4px;
-}
-
-.publish-course .booking-grid::-webkit-scrollbar-thumb:horizontal {
-	background: #c1c1c1;
-	border-radius: 4px;
-}
-
-.publish-course .booking-grid::-webkit-scrollbar-thumb:horizontal:hover {
-	background: #a8a8a8;
-}

@@ -290,18 +290,9 @@ const TimeVenueGrid: React.FC<{
 								>
 									{isAvailable ? (
 										<div className="available-slot">
-											可选
 										</div>
 									) : (
 										<div className="booked-slot">
-											{booking?.bookedBy ? (
-												<div className="booked-info">
-													<div className="booked-badge">微信付款</div>
-													<div className="booked-contact">{booking.bookedBy.replace('微信付款 ', '')}</div>
-												</div>
-											) : (
-												<div className="unavailable-text">不可用</div>
-											)}
 										</div>
 									)}
 								</div>
