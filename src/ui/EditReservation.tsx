@@ -410,20 +410,13 @@ const CourseSelectionField: React.FC<{
 const CoachSelectionField: React.FC<{ 
 	label: string; 
 	coaches: Array<{id: string, name: string}>;
-	selectedCoaches: string[];
-	onCoachSelect: (coachIds: string[]) => void;
+	selectedCoach: string;
+	onCoachSelect: (coachId: string) => void;
 	disabled?: boolean;
-}> = ({ label, coaches, selectedCoaches, onCoachSelect, disabled = false }) => {
+}> = ({ label, coaches, selectedCoach, onCoachSelect, disabled = false }) => {
 	const handleCoachChange = (coachId: string) => {
 		if (disabled) return;
-		
-		if (selectedCoaches.includes(coachId)) {
-			// Remove coach from selection
-			onCoachSelect(selectedCoaches.filter(id => id !== coachId));
-		} else {
-			// Add coach to selection
-			onCoachSelect([...selectedCoaches, coachId]);
-		}
+		onCoachSelect(coachId);
 	};
 
 	return (
@@ -433,11 +426,11 @@ const CoachSelectionField: React.FC<{
 				{coaches.map((coach) => (
 					<div 
 						key={coach.id} 
-						className={`coach-grid-item ${selectedCoaches.includes(coach.id) ? 'selected' : ''} ${disabled ? 'disabled' : ''}`}
+						className={`coach-grid-item ${selectedCoach === coach.id ? 'selected' : ''} ${disabled ? 'disabled' : ''}`}
 						onClick={() => handleCoachChange(coach.id)}
 					>
 						<div className="coach-name">{coach.name}</div>
-						{selectedCoaches.includes(coach.id) && (
+						{selectedCoach === coach.id && (
 							<div className="coach-check">✓</div>
 						)}
 					</div>
@@ -454,7 +447,7 @@ export const EditReservation: React.FC = () => {
 	const [selectedTime, setSelectedTime] = useState('')
 	const [selectedStores, setSelectedStores] = useState<string[]>([])
 	const [selectedCourse, setSelectedCourse] = useState<string>('')
-	const [selectedCoaches, setSelectedCoaches] = useState<string[]>([])
+	const [selectedCoach, setSelectedCoach] = useState<string>('')
 	const [studentPhone, setStudentPhone] = useState('')
 	const [studentNickname, setStudentNickname] = useState('')
 	const [remarks, setRemarks] = useState('')
@@ -520,7 +513,7 @@ export const EditReservation: React.FC = () => {
 		setSelectedTime('13:00-14:00')
 		setSelectedStores(['TT网球（南山中心店）'])
 		setSelectedCourse('4') // 选中"1对2导师"课程
-		setSelectedCoaches(['2']) // 选中"李"教练
+		setSelectedCoach('2') // 选中"李教练"
 		setRemarks('掌握正反手基础知识但不熟练')
 	}, [])
 	
@@ -559,8 +552,8 @@ export const EditReservation: React.FC = () => {
 				<CoachSelectionField 
 					label="教练选择 (选填)"
 					coaches={coachDatabase}
-					selectedCoaches={selectedCoaches}
-					onCoachSelect={setSelectedCoaches}
+					selectedCoach={selectedCoach}
+					onCoachSelect={setSelectedCoach}
 					disabled={true}
 				/>
 				
