@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import './ReservationDetail.css'
 
@@ -16,13 +16,55 @@ const IconImage: React.FC = () => <Svg path="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 
 const IconEdit: React.FC = () => <Svg path="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
 const IconX: React.FC = () => <Svg path="M18 6L6 18M6 6l12 12" />
 
+// 取消订单确认弹窗组件
+const CancelOrderModal: React.FC<{
+	isOpen: boolean;
+	onClose: () => void;
+	onConfirm: () => void;
+}> = ({ isOpen, onClose, onConfirm }) => {
+	if (!isOpen) return null;
+
+	return (
+		<div className="modal-overlay" onClick={onClose}>
+			<div className="cancel-modal" onClick={(e) => e.stopPropagation()}>
+				<div className="modal-header">
+					<h3>提示</h3>
+				</div>
+				<div className="modal-content">
+					<p className="cancelled-message">课程已取消</p>
+				</div>
+				<div className="modal-actions">
+					<button className="modal-btn primary single" onClick={onConfirm}>
+						确定
+					</button>
+				</div>
+			</div>
+		</div>
+	);
+};
+
 export const ReservationDetail: React.FC = () => {
 	const navigate = useNavigate()
 	const { id } = useParams()
+	const [showCancelModal, setShowCancelModal] = useState(false)
 	
 	// Determine if this is a pending or accepted order based on ID
 	// For demo purposes: IDs 1,2,3 are pending, 4,5 are accepted
 	const isPending = id && ['1', '2', '3'].includes(id)
+	
+	const handleCancelOrder = () => {
+		setShowCancelModal(true)
+	}
+	
+	const handleConfirmCancel = () => {
+		setShowCancelModal(false)
+		// 这里可以添加实际的取消订单逻辑
+		navigate('/reservation')
+	}
+	
+	const handleCloseCancelModal = () => {
+		setShowCancelModal(false)
+	}
 	
 	return (
 		<div className="page reservation-detail-new">
@@ -88,7 +130,7 @@ export const ReservationDetail: React.FC = () => {
 							<IconEdit />
 							<span>更改预约</span>
 						</button>
-						<button className="confirm-btn" onClick={() => navigate('/reservation')}>
+						<button className="confirm-btn" onClick={handleCancelOrder}>
 							<IconX />
 							<span>取消订单</span>
 						</button>
@@ -99,13 +141,19 @@ export const ReservationDetail: React.FC = () => {
 							<IconEdit />
 							<span>更改预约</span>
 						</button>
-						<button className="confirm-btn" onClick={() => navigate('/reservation')}>
+						<button className="confirm-btn" onClick={handleCancelOrder}>
 							<IconX />
 							<span>取消订单</span>
 						</button>
 					</>
 				)}
 			</div>
+			
+			<CancelOrderModal 
+				isOpen={showCancelModal}
+				onClose={handleCloseCancelModal}
+				onConfirm={handleConfirmCancel}
+			/>
 		</div>
 	)
 } 

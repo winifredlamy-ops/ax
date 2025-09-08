@@ -200,3 +200,111 @@
 .confirm-btn:hover {
 	background: #dee2e6;
 }
+
+/* 取消订单弹窗样式 */
+.modal-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(0, 0, 0, 0.5);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 1000;
+}
+
+.cancel-modal {
+	background: white;
+	border-radius: 8px;
+	width: 320px;
+	max-width: 90vw;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+	overflow: hidden;
+}
+
+.modal-header {
+	background: #f3f4f6;
+	padding: 16px 20px;
+	text-align: center;
+	border-bottom: 1px solid #e5e7eb;
+}
+
+.modal-header h3 {
+	margin: 0;
+	font-size: 16px;
+	font-weight: 600;
+	color: #6b7280;
+}
+
+.modal-content {
+	padding: 24px 20px;
+	text-align: center;
+}
+
+.modal-content p {
+	margin: 0 0 8px 0;
+	font-size: 14px;
+	color: #374151;
+	line-height: 1.4;
+}
+
+.modal-content p:last-child {
+	margin-bottom: 0;
+}
+
+.cancelled-message {
+	color: #374151 !important;
+	font-weight: 500 !important;
+	font-size: 20px !important;
+	padding: 20px;
+	margin: 8px 0 !important;
+	text-align: center;
+}
+
+.modal-btn.single {
+	border-right: none !important;
+}
+
+.modal-actions {
+	display: flex;
+	border-top: 1px solid #e5e7eb;
+}
+
+.modal-btn {
+	flex: 1;
+	padding: 16px;
+	border: none;
+	background: white;
+	font-size: 16px;
+	font-weight: 500;
+	cursor: pointer;
+	transition: background-color 0.2s;
+}
+
+.modal-btn.secondary {
+	color: #6b7280;
+	border-right: 1px solid #e5e7eb;
+}
+
+.modal-btn.secondary:hover {
+	background: #f9fafb;
+}
+
+.modal-btn.primary {
+	color: #dc2626;
+}
+
+.modal-btn.primary:hover {
+	background: #fef2f2;
+}
+
+.modal-btn.primary.single {
+	color: #000000;
+	background: #ffffff;
+}
+
+.modal-btn.primary.single:hover {
+	background: #f9fafb;
+}
