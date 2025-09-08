@@ -436,9 +436,6 @@ const CoachSelectionField: React.FC<{
 						className={`coach-grid-item ${selectedCoaches.includes(coach.id) ? 'selected' : ''} ${disabled ? 'disabled' : ''}`}
 						onClick={() => handleCoachChange(coach.id)}
 					>
-						<div className="coach-avatar">
-							{coach.name.charAt(0)}
-						</div>
 						<div className="coach-name">{coach.name}</div>
 						{selectedCoaches.includes(coach.id) && (
 							<div className="coach-check">✓</div>
