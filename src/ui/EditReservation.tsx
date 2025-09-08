@@ -394,18 +394,21 @@ const CoachSelectionField: React.FC<{
 	return (
 		<div className="form-field">
 			<label className="field-label">{label}</label>
-			<div className="checkbox-group">
+			<div className="coach-grid">
 				{coaches.map((coach) => (
-					<label key={coach.id} className={`checkbox-item ${disabled ? 'disabled' : ''}`}>
-						<input 
-							type="checkbox" 
-							value={coach.id}
-							checked={selectedCoaches.includes(coach.id)}
-							onChange={() => handleCoachChange(coach.id)}
-							disabled={disabled}
-						/>
-						<span className="checkbox-label">{coach.name}</span>
-					</label>
+					<div 
+						key={coach.id} 
+						className={`coach-grid-item ${selectedCoaches.includes(coach.id) ? 'selected' : ''} ${disabled ? 'disabled' : ''}`}
+						onClick={() => handleCoachChange(coach.id)}
+					>
+						<div className="coach-avatar">
+							{coach.name.charAt(0)}
+						</div>
+						<div className="coach-name">{coach.name}</div>
+						{selectedCoaches.includes(coach.id) && (
+							<div className="coach-check">✓</div>
+						)}
+					</div>
 				))}
 			</div>
 		</div>
@@ -444,9 +447,13 @@ export const EditReservation: React.FC = () => {
 	// 模拟教练数据库
 	const coachDatabase = [
 		{ id: '1', name: '小蒙' },
-		{ id: '2', name: '李' },
+		{ id: '2', name: '李教练' },
 		{ id: '3', name: '王教练' },
 		{ id: '4', name: '张教练' },
+		{ id: '5', name: '陈教练' },
+		{ id: '6', name: '刘教练' },
+		{ id: '7', name: '赵教练' },
+		{ id: '8', name: '孙教练' },
 	]
 	
 	// 处理手机号输入和查找
