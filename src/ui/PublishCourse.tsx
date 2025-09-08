@@ -411,12 +411,43 @@ const StudentInfoField: React.FC<{
 	)
 }
 
+// 教练选择组件
+const CoachSelectionField: React.FC<{ 
+	label: string; 
+	coaches: Array<{id: string, name: string}>;
+	selectedCoach: string;
+	onCoachSelect: (coachId: string) => void;
+	disabled?: boolean;
+}> = ({ label, coaches, selectedCoach, onCoachSelect, disabled = false }) => {
+	return (
+		<div className="form-field">
+			<label className="field-label">{label}</label>
+			<div className="radio-group">
+				{coaches.map((coach) => (
+					<label key={coach.id} className={`radio-item ${disabled ? 'disabled' : ''}`}>
+						<input 
+							type="radio" 
+							name="coach-selection"
+							value={coach.id}
+							checked={selectedCoach === coach.id}
+							onChange={(e) => !disabled && onCoachSelect(e.target.value)}
+							disabled={disabled}
+						/>
+						<span className="radio-label">{coach.name}</span>
+					</label>
+				))}
+			</div>
+		</div>
+	)
+}
+
 export const PublishCourse: React.FC = () => {
 	const navigate = useNavigate()
 	const [selectedDate, setSelectedDate] = useState('')
 	const [selectedTime, setSelectedTime] = useState('')
 	const [selectedStore, setSelectedStore] = useState('')
 	const [selectedCourse, setSelectedCourse] = useState('')
+	const [selectedCoach, setSelectedCoach] = useState('')
 	const [studentPhone, setStudentPhone] = useState('')
 	const [studentNickname, setStudentNickname] = useState('')
 	const [remarks, setRemarks] = useState('')
@@ -437,6 +468,14 @@ export const PublishCourse: React.FC = () => {
 		{ phone: '18611112222', nickname: '陈教练' },
 		{ phone: '13666667777', nickname: '刘学员' },
 		{ phone: '13777777777', nickname: '夜场王' },
+	]
+	
+	// 模拟教练数据库
+	const coachDatabase = [
+		{ id: '1', name: '小蒙' },
+		{ id: '2', name: '李' },
+		{ id: '3', name: '王教练' },
+		{ id: '4', name: '张教练' },
 	]
 	
 	// Check if we're in edit mode
@@ -525,6 +564,14 @@ export const PublishCourse: React.FC = () => {
 					options={courseOptions}
 					value={selectedCourse}
 					onChange={setSelectedCourse}
+					disabled={isEditMode}
+				/>
+				
+				<CoachSelectionField 
+					label="教练选择 (选填)"
+					coaches={coachDatabase}
+					selectedCoach={selectedCoach}
+					onCoachSelect={setSelectedCoach}
 					disabled={isEditMode}
 				/>
 				
