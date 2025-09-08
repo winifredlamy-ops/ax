@@ -205,7 +205,6 @@ const StudentInfoField: React.FC<{
 						disabled={disabled}
 					/>
 				</div>
-				<div className="field-hint">支持输入四位尾号快速查找</div>
 			</div>
 			<div className="form-field">
 				<label className="field-label">{nicknameLabel}</label>
