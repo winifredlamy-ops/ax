@@ -387,7 +387,21 @@ const CalendarField: React.FC<{
 	onDateSelect: (date: string) => void;
 	disabled?: boolean;
 }> = ({ label, selectedDate, onDateSelect, disabled = false }) => {
-	const [currentMonth, setCurrentMonth] = useState(new Date())
+	// 如果有选中日期，初始化为对应月份，否则使用当前月份
+	const getInitialMonth = () => {
+		if (selectedDate) {
+			// 解析选中日期的月份
+			const monthMatch = selectedDate.match(/(\d{2})月/)
+			if (monthMatch) {
+				const month = parseInt(monthMatch[1]) - 1 // 月份从0开始
+				const currentYear = new Date().getFullYear()
+				return new Date(currentYear, month, 1)
+			}
+		}
+		return new Date()
+	}
+	
+	const [currentMonth, setCurrentMonth] = useState(getInitialMonth)
 	
 	// 获取当前月份的所有日期
 	const getDaysInMonth = (date: Date) => {
@@ -721,7 +735,7 @@ export const PublishCourse: React.FC = () => {
 	React.useEffect(() => {
 		if (isEditMode && editId) {
 			// Pre-fill with sample data for demo
-			setSelectedDate('08月13日 星期三')
+			setSelectedDate('08月07日 星期四')
 			setSelectedTime('13:00-14:00')
 			setSelectedStores(['TT网球（南山中心店）'])
 			setSelectedCourse('4') // 选中"1对2导师"课程

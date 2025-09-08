@@ -233,6 +233,121 @@ body {
 	font-weight: 600;
 }
 
+/* 日历样式 */
+.calendar-container {
+	background: #ffffff;
+	border: 1px solid #e2e8f0;
+	border-radius: 8px;
+	padding: 8px;
+}
+
+.calendar-container.disabled {
+	opacity: 0.6;
+	pointer-events: none;
+}
+
+.calendar-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 8px;
+}
+
+.calendar-nav-btn {
+	background: none;
+	border: none;
+	padding: 4px;
+	cursor: pointer;
+	border-radius: 4px;
+	color: #374151;
+}
+
+.calendar-nav-btn:hover {
+	background: #f1f5f9;
+}
+
+.calendar-nav-btn.disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
+}
+
+.calendar-nav-btn.disabled:hover {
+	background: none;
+}
+
+.calendar-month-year {
+	font-size: 16px;
+	font-weight: 600;
+	color: #374151;
+}
+
+.calendar-weekdays {
+	display: grid;
+	grid-template-columns: repeat(7, 1fr);
+	gap: 1px;
+	margin-bottom: 4px;
+}
+
+.calendar-weekday {
+	text-align: center;
+	font-size: 12px;
+	font-weight: 500;
+	color: #6b7280;
+	padding: 4px 2px;
+}
+
+.calendar-days {
+	display: grid;
+	grid-template-columns: repeat(7, 1fr);
+	row-gap: 1px;
+	column-gap: 2px;
+}
+
+.calendar-day {
+	aspect-ratio: 1;
+	border: none;
+	background: none;
+	cursor: pointer;
+	border-radius: 3px;
+	min-height: 20px;
+	font-size: 13px;
+	color: #374151;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.calendar-day:hover:not(.disabled) {
+	background: #f1f5f9;
+}
+
+.calendar-day.selected {
+	background: #3b82f6 !important;
+	color: #ffffff !important;
+	border: 2px solid #1d4ed8 !important;
+	box-shadow: 0 0 0 1px #ffffff, 0 0 0 3px #3b82f6 !important;
+	font-weight: 600 !important;
+}
+
+.calendar-day.selected:hover {
+	background: #2563eb;
+	border-color: #1e40af;
+	box-shadow: 0 0 0 1px #ffffff, 0 0 0 3px #2563eb;
+}
+
+.calendar-day.other-month {
+	color: #d1d5db;
+}
+
+.calendar-day.disabled {
+	color: #d1d5db;
+	cursor: not-allowed;
+}
+
+.calendar-day.disabled:hover {
+	background: none;
+}
+
 .section-title {
 	margin: 12px 4px 6px;
 	color: var(--muted);

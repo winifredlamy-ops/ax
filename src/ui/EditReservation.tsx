@@ -230,7 +230,33 @@ const CalendarField: React.FC<{
 	onDateSelect: (date: string) => void;
 	disabled?: boolean;
 }> = ({ label, selectedDate, onDateSelect, disabled = false }) => {
-	const [currentMonth, setCurrentMonth] = useState(new Date())
+	// 如果有选中日期，初始化为对应月份，否则使用当前月份
+	const getInitialMonth = () => {
+		if (selectedDate) {
+			// 解析选中日期的月份
+			const monthMatch = selectedDate.match(/(\d{2})月/)
+			if (monthMatch) {
+				const month = parseInt(monthMatch[1]) - 1 // 月份从0开始
+				const currentYear = new Date().getFullYear()
+				return new Date(currentYear, month, 1)
+			}
+		}
+		return new Date()
+	}
+	
+	const [currentMonth, setCurrentMonth] = useState(getInitialMonth)
+	
+	// 当selectedDate改变时，更新日历月份
+	React.useEffect(() => {
+		if (selectedDate) {
+			const monthMatch = selectedDate.match(/(\d{2})月/)
+			if (monthMatch) {
+				const month = parseInt(monthMatch[1]) - 1
+				const currentYear = new Date().getFullYear()
+				setCurrentMonth(new Date(currentYear, month, 1))
+			}
+		}
+	}, [selectedDate])
 	
 	// 获取当前月份的所有日期
 	const getDaysInMonth = (date: Date) => {
@@ -289,7 +315,18 @@ const CalendarField: React.FC<{
 	// 检查日期是否被选中
 	const isDateSelected = (date: Date) => {
 		if (!selectedDate) return false
-		return formatDate(date) === selectedDate
+		const formattedDate = formatDate(date)
+		const isSelected = formattedDate === selectedDate
+		// 调试信息
+		if (date.getDate() === 7 && date.getMonth() === 7) { // 8月7日
+			console.log('Debug 8月7日:', {
+				formattedDate,
+				selectedDate,
+				isSelected,
+				dateObject: date
+			})
+		}
+		return isSelected
 	}
 	
 	// 检查日期是否是今天或之后
@@ -508,7 +545,8 @@ export const EditReservation: React.FC = () => {
 	
 	// Pre-fill data for editing
 	useEffect(() => {
-		setSelectedDate('08月13日 星期三')
+		console.log('Setting selectedDate to: 08月07日 星期四')
+		setSelectedDate('08月07日 星期四')
 		setSelectedTime('13:00-14:00')
 		setSelectedStores(['TT网球（南山中心店）'])
 		setSelectedCourse('4') // 选中"1对2导师"课程
@@ -531,7 +569,7 @@ export const EditReservation: React.FC = () => {
 					label="日期选择" 
 					selectedDate={selectedDate}
 					onDateSelect={setSelectedDate}
-					disabled={true}
+					disabled={false}
 				/>
 				<DropdownField 
 					label="时间选择" 
@@ -553,7 +591,7 @@ export const EditReservation: React.FC = () => {
 					coaches={coachDatabase}
 					selectedCoach={selectedCoach}
 					onCoachSelect={setSelectedCoach}
-					disabled={true}
+					disabled={false}
 				/>
 				
 				<StudentInfoField 
