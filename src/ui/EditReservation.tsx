@@ -223,6 +223,118 @@ const StudentInfoField: React.FC<{
 	)
 }
 
+// 时段和场地网格组件
+const TimeVenueGrid: React.FC<{
+	selectedSlot: { timeSlotId: string, venueId: string } | null;
+	onSlotSelect: (timeSlotId: string, venueId: string) => void;
+	disabled?: boolean;
+}> = ({ selectedSlot, onSlotSelect, disabled = false }) => {
+	// 场地数据
+	const venues = [
+		{ id: '1', name: '1号场' },
+		{ id: '2', name: '2号场' },
+		{ id: '3', name: '3号场' },
+		{ id: '4', name: '4号场' },
+		{ id: '5', name: '5号场' },
+		{ id: '6', name: '6号场' }
+	];
+
+	// 时段数据 (24小时，每30分钟一个时段)
+	const timeSlots = [];
+	for (let hour = 0; hour < 24; hour++) {
+		for (let minute = 0; minute < 60; minute += 30) {
+			const startHour = hour.toString().padStart(2, '0');
+			const startMinute = minute.toString().padStart(2, '0');
+			const endHour = minute === 30 ? (hour + 1).toString().padStart(2, '0') : hour.toString().padStart(2, '0');
+			const endMinute = minute === 30 ? '00' : '30';
+			
+			timeSlots.push({
+				id: `${startHour}:${startMinute}-${endHour}:${endMinute}`,
+				start: `${startHour}:${startMinute}`,
+				end: `${endHour}:${endMinute}`
+			});
+		}
+	}
+
+	// 模拟预订数据
+	const mockBookings = [
+		{ timeSlotId: '08:00-08:30', venueId: '1', available: false },
+		{ timeSlotId: '08:00-08:30', venueId: '2', available: false },
+		{ timeSlotId: '09:30-10:00', venueId: '6', available: false },
+		{ timeSlotId: '11:00-11:30', venueId: '2', available: false },
+		{ timeSlotId: '11:00-11:30', venueId: '5', available: false },
+		{ timeSlotId: '12:00-12:30', venueId: '1', available: false },
+		{ timeSlotId: '12:00-12:30', venueId: '5', available: false },
+		{ timeSlotId: '12:30-13:00', venueId: '5', available: false },
+		{ timeSlotId: '15:00-15:30', venueId: '3', available: false },
+		{ timeSlotId: '16:00-16:30', venueId: '6', available: false },
+		{ timeSlotId: '18:00-18:30', venueId: '4', available: false },
+		{ timeSlotId: '19:00-19:30', venueId: '1', available: false },
+		{ timeSlotId: '19:00-19:30', venueId: '2', available: false },
+		{ timeSlotId: '20:00-20:30', venueId: '3', available: false },
+		{ timeSlotId: '21:00-21:30', venueId: '6', available: false },
+	];
+
+	// 获取特定时段和场地的预订状态
+	const getBookingStatus = (timeSlotId: string, venueId: string) => {
+		return mockBookings.find(b => b.timeSlotId === timeSlotId && b.venueId === venueId);
+	};
+
+	// 处理时段选择
+	const handleSlotSelect = (timeSlotId: string, venueId: string) => {
+		if (disabled) return;
+		const booking = getBookingStatus(timeSlotId, venueId);
+		if (booking?.available !== false) {
+			onSlotSelect(timeSlotId, venueId);
+		}
+	};
+
+	return (
+		<div className="form-field">
+			<label className="field-label">时段和场地选择</label>
+			<div className="booking-grid">
+				<div className="grid-header">
+					<div className="time-header">时段</div>
+					{venues.map(venue => (
+						<div key={venue.id} className="venue-header">
+							{venue.name}
+						</div>
+					))}
+				</div>
+
+				{timeSlots.map(timeSlot => (
+					<div key={timeSlot.id} className="grid-row">
+						<div className="time-cell">
+							<div className="time-range">
+								{timeSlot.start}<br />~<br />{timeSlot.end}
+							</div>
+						</div>
+						{venues.map(venue => {
+							const booking = getBookingStatus(timeSlot.id, venue.id);
+							const isSelected = selectedSlot?.timeSlotId === timeSlot.id && selectedSlot?.venueId === venue.id;
+							const isAvailable = booking?.available !== false;
+							
+							return (
+								<div 
+									key={venue.id}
+									className={`venue-cell ${!isAvailable ? 'unavailable' : ''} ${isSelected ? 'selected' : ''}`}
+									onClick={() => handleSlotSelect(timeSlot.id, venue.id)}
+								>
+									{isAvailable ? (
+										<div className="available-slot"></div>
+									) : (
+										<div className="booked-slot"></div>
+									)}
+								</div>
+							);
+						})}
+					</div>
+				))}
+			</div>
+		</div>
+	);
+};
+
 // 日历选择组件
 const CalendarField: React.FC<{ 
 	label: string; 
@@ -480,7 +592,7 @@ export const EditReservation: React.FC = () => {
 	const navigate = useNavigate()
 	const { id } = useParams()
 	const [selectedDate, setSelectedDate] = useState('')
-	const [selectedTime, setSelectedTime] = useState('')
+	const [selectedSlot, setSelectedSlot] = useState<{ timeSlotId: string, venueId: string } | null>(null)
 	const [selectedStores, setSelectedStores] = useState<string[]>([])
 	const [selectedCourse, setSelectedCourse] = useState<string>('')
 	const [selectedCoach, setSelectedCoach] = useState<string>('')
@@ -543,11 +655,16 @@ export const EditReservation: React.FC = () => {
 		}
 	}
 	
+	// 处理时段选择
+	const handleSlotSelect = (timeSlotId: string, venueId: string) => {
+		setSelectedSlot({ timeSlotId, venueId });
+	};
+	
 	// Pre-fill data for editing
 	useEffect(() => {
 		console.log('Setting selectedDate to: 08月07日 星期四')
 		setSelectedDate('08月07日 星期四')
-		setSelectedTime('13:00-14:00')
+		setSelectedSlot({ timeSlotId: '09:00-09:30', venueId: '4' }) // 选中09:00-09:30，4号场
 		setSelectedStores(['TT网球（南山中心店）'])
 		setSelectedCourse('4') // 选中"1对2导师"课程
 		setSelectedCoach('2') // 选中"李教练"
@@ -571,12 +688,10 @@ export const EditReservation: React.FC = () => {
 					onDateSelect={setSelectedDate}
 					disabled={false}
 				/>
-				<DropdownField 
-					label="时间选择" 
-					placeholder="请选择时间" 
-					options={timeOptions}
-					value={selectedTime}
-					onChange={setSelectedTime}
+				<TimeVenueGrid
+					selectedSlot={selectedSlot}
+					onSlotSelect={handleSlotSelect}
+					disabled={false}
 				/>
 				<CourseSelectionField 
 					label="课程选择" 

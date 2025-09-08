@@ -348,6 +348,51 @@ body {
 	background: none;
 }
 
+/* 时间选择网格样式 */
+.time-selection-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+	gap: 8px;
+	margin-top: 8px;
+}
+
+.time-slot {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 12px 8px;
+	border: 1px solid var(--border);
+	border-radius: 6px;
+	background: #fff;
+	cursor: pointer;
+	transition: all 0.2s ease;
+	min-height: 60px;
+}
+
+.time-slot:hover:not(.disabled) {
+	background: #f9fafb;
+	border-color: var(--primary);
+}
+
+.time-slot.selected {
+	background: var(--primary);
+	color: white;
+	border-color: var(--primary);
+}
+
+.time-slot.disabled {
+	opacity: 0.6;
+	cursor: not-allowed;
+	background: #f9fafb;
+}
+
+.time-range {
+	text-align: center;
+	font-size: 12px;
+	font-weight: 500;
+	line-height: 1.2;
+}
+
 .section-title {
 	margin: 12px 4px 6px;
 	color: var(--muted);
