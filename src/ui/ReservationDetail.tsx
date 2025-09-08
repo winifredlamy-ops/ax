@@ -15,6 +15,7 @@ const IconPerson: React.FC = () => <Svg path="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 
 const IconImage: React.FC = () => <Svg path="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z" />
 const IconEdit: React.FC = () => <Svg path="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
 const IconX: React.FC = () => <Svg path="M18 6L6 18M6 6l12 12" />
+const IconCourt: React.FC = () => <Svg path="M3 3h18v18H3V3zm2 2v14h14V5H5zm2 2h10v10H7V7zm2 2v6h6V9H9z" />
 
 // 取消订单确认弹窗组件
 const CancelOrderModal: React.FC<{
@@ -82,6 +83,13 @@ export const ReservationDetail: React.FC = () => {
 								<IconCalendar />
 								<span>
 									{isPending ? "08月10日 星期日 18:00-20:00" : "08月07日 星期四 12:00-13:00"}
+								</span>
+							</div>
+							
+							<div className="detail-row">
+								<IconCourt />
+								<span>
+									{isPending ? "3号场" : "4号场"}
 								</span>
 							</div>
 							
