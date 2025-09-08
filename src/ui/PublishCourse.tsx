@@ -154,11 +154,11 @@ const timeOptions = [
 ]
 
 const courseOptions = [
-	"1对1私教体验课-室内60分钟",
-	"1对2私教体验课-室内60分钟", 
-	"1对1导师体验课-室内60分钟",
-	"1对2导师体验课-室内60分钟",
-	"周末单次小团课体验-4人班/120分钟"
+	{ id: '1', name: "1对1私教", duration: "60分钟" },
+	{ id: '2', name: "1对2私教", duration: "60分钟" },
+	{ id: '3', name: "1对1导师", duration: "60分钟" },
+	{ id: '4', name: "1对2导师", duration: "60分钟" },
+	{ id: '5', name: "小团课", duration: "120分钟" }
 ]
 
 const CheckboxField: React.FC<{ 
@@ -572,6 +572,41 @@ const StudentInfoField: React.FC<{
 	)
 }
 
+// 课程选择组件
+const CourseSelectionField: React.FC<{ 
+	label: string; 
+	courses: Array<{id: string, name: string, duration: string}>;
+	selectedCourse: string;
+	onCourseSelect: (courseId: string) => void;
+	disabled?: boolean;
+}> = ({ label, courses, selectedCourse, onCourseSelect, disabled = false }) => {
+	const handleCourseChange = (courseId: string) => {
+		if (disabled) return;
+		onCourseSelect(courseId);
+	};
+
+	return (
+		<div className="form-field">
+			<label className="field-label">{label}</label>
+			<div className="course-grid">
+				{courses.map((course) => (
+					<div 
+						key={course.id} 
+						className={`course-grid-item ${selectedCourse === course.id ? 'selected' : ''} ${disabled ? 'disabled' : ''}`}
+						onClick={() => handleCourseChange(course.id)}
+					>
+						<div className="course-name">{course.name}</div>
+						<div className="course-duration">{course.duration}</div>
+						{selectedCourse === course.id && (
+							<div className="course-check">✓</div>
+						)}
+					</div>
+				))}
+			</div>
+		</div>
+	)
+}
+
 // 教练选择组件
 const CoachSelectionField: React.FC<{ 
 	label: string; 
@@ -621,7 +656,7 @@ export const PublishCourse: React.FC = () => {
 	const [selectedDate, setSelectedDate] = useState('')
 	const [selectedTime, setSelectedTime] = useState('')
 	const [selectedStores, setSelectedStores] = useState<string[]>([])
-	const [selectedCourses, setSelectedCourses] = useState<string[]>([])
+	const [selectedCourse, setSelectedCourse] = useState<string>('')
 	const [selectedCoaches, setSelectedCoaches] = useState<string[]>([])
 	const [studentPhone, setStudentPhone] = useState('')
 	const [studentNickname, setStudentNickname] = useState('')
@@ -700,7 +735,7 @@ export const PublishCourse: React.FC = () => {
 			setSelectedDate('08月13日 星期三')
 			setSelectedTime('13:00-14:00')
 			setSelectedStores(['TT网球（南山中心店）'])
-			setSelectedCourses(['1对2导师体验课-室内60分钟'])
+			setSelectedCourse('4') // 选中"1对2导师"课程
 			setSelectedCoaches(['2']) // 选中"李"教练
 			setRemarks('掌握正反手基础知识但不熟练')
 		}
@@ -737,11 +772,11 @@ export const PublishCourse: React.FC = () => {
 						onSlotSelect={handleSlotSelect}
 					/>
 				)}
-				<CheckboxField 
+				<CourseSelectionField 
 					label="课程选择" 
-					options={courseOptions}
-					values={selectedCourses}
-					onChange={setSelectedCourses}
+					courses={courseOptions}
+					selectedCourse={selectedCourse}
+					onCourseSelect={setSelectedCourse}
 					disabled={isEditMode}
 				/>
 				
