@@ -9,6 +9,8 @@ const Svg: React.FC<{ path: string; className?: string }> = ({ path, className }
 
 const IconChevronDown: React.FC = () => <Svg path="M6 9l6 6 6-6" />
 const IconChevronUp: React.FC = () => <Svg path="M18 15l-6-6-6 6" />
+const IconChevronLeft: React.FC = () => <Svg path="M15 18l-6-6 6-6" />
+const IconChevronRight: React.FC = () => <Svg path="M9 18l6-6-6-6" />
 const IconSave: React.FC = () => <Svg path="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2Z" />
 const IconSend: React.FC = () => <Svg path="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
 
@@ -210,6 +212,153 @@ const StudentInfoField: React.FC<{
 	)
 }
 
+// 日历选择组件
+const CalendarField: React.FC<{ 
+	label: string; 
+	selectedDate: string;
+	onDateSelect: (date: string) => void;
+	disabled?: boolean;
+}> = ({ label, selectedDate, onDateSelect, disabled = false }) => {
+	const [currentMonth, setCurrentMonth] = useState(new Date())
+	
+	// 获取当前月份的所有日期
+	const getDaysInMonth = (date: Date) => {
+		const year = date.getFullYear()
+		const month = date.getMonth()
+		const firstDay = new Date(year, month, 1)
+		const lastDay = new Date(year, month + 1, 0)
+		const daysInMonth = lastDay.getDate()
+		const startingDayOfWeek = firstDay.getDay()
+		
+		const days = []
+		
+		// 添加上个月的尾部日期（灰色显示）
+		for (let i = startingDayOfWeek - 1; i >= 0; i--) {
+			const prevDate = new Date(year, month, -i)
+			days.push({
+				date: prevDate.getDate(),
+				isCurrentMonth: false,
+				fullDate: prevDate
+			})
+		}
+		
+		// 添加当前月的所有日期
+		for (let day = 1; day <= daysInMonth; day++) {
+			const currentDate = new Date(year, month, day)
+			days.push({
+				date: day,
+				isCurrentMonth: true,
+				fullDate: currentDate
+			})
+		}
+		
+		// 添加下个月的开头日期（灰色显示），补齐6行
+		const remainingDays = 42 - days.length
+		for (let day = 1; day <= remainingDays; day++) {
+			const nextDate = new Date(year, month + 1, day)
+			days.push({
+				date: day,
+				isCurrentMonth: false,
+				fullDate: nextDate
+			})
+		}
+		
+		return days
+	}
+	
+	// 格式化日期为显示格式
+	const formatDate = (date: Date) => {
+		const month = date.getMonth() + 1
+		const day = date.getDate()
+		const weekdays = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六']
+		const weekday = weekdays[date.getDay()]
+		return `${month.toString().padStart(2, '0')}月${day.toString().padStart(2, '0')}日 ${weekday}`
+	}
+	
+	// 检查日期是否被选中
+	const isDateSelected = (date: Date) => {
+		if (!selectedDate) return false
+		return formatDate(date) === selectedDate
+	}
+	
+	// 检查日期是否是今天或之后
+	const isDateAvailable = (date: Date) => {
+		const today = new Date()
+		today.setHours(0, 0, 0, 0)
+		return date >= today
+	}
+	
+	// 处理日期选择
+	const handleDateSelect = (date: Date) => {
+		if (!disabled && isDateAvailable(date)) {
+			onDateSelect(formatDate(date))
+		}
+	}
+	
+	// 切换月份
+	const changeMonth = (increment: number) => {
+		setCurrentMonth(prev => {
+			const newDate = new Date(prev)
+			newDate.setMonth(prev.getMonth() + increment)
+			return newDate
+		})
+	}
+	
+	const days = getDaysInMonth(currentMonth)
+	const monthYear = `${currentMonth.getFullYear()}年${(currentMonth.getMonth() + 1).toString().padStart(2, '0')}月`
+	
+	return (
+		<div className="form-field">
+			<label className="field-label">{label}</label>
+			<div className={`calendar-container ${disabled ? 'disabled' : ''}`}>
+				<div className="calendar-header">
+					<button 
+						type="button"
+						className={`calendar-nav-btn ${disabled ? 'disabled' : ''}`}
+						onClick={() => !disabled && changeMonth(-1)}
+						disabled={disabled}
+					>
+						<IconChevronLeft />
+					</button>
+					<span className="calendar-month-year">{monthYear}</span>
+					<button 
+						type="button"
+						className={`calendar-nav-btn ${disabled ? 'disabled' : ''}`}
+						onClick={() => !disabled && changeMonth(1)}
+						disabled={disabled}
+					>
+						<IconChevronRight />
+					</button>
+				</div>
+				<div className="calendar-weekdays">
+					{['日', '一', '二', '三', '四', '五', '六'].map(weekday => (
+						<div key={weekday} className="calendar-weekday">{weekday}</div>
+					))}
+				</div>
+				<div className="calendar-days">
+					{days.map((day, index) => (
+						<button
+							key={index}
+							type="button"
+							className={`calendar-day ${
+								!day.isCurrentMonth ? 'other-month' : ''
+							} ${
+								isDateSelected(day.fullDate) ? 'selected' : ''
+							} ${
+								!isDateAvailable(day.fullDate) || disabled ? 'disabled' : ''
+							}`}
+							onClick={() => handleDateSelect(day.fullDate)}
+							disabled={!isDateAvailable(day.fullDate) || disabled}
+						>
+							{day.date}
+						</button>
+					))}
+				</div>
+			</div>
+		</div>
+	)
+}
+
 // 教练选择组件
 const CoachSelectionField: React.FC<{ 
 	label: string; 
@@ -323,12 +472,10 @@ export const EditReservation: React.FC = () => {
 					disabled={true}
 				/>
 				
-				<DropdownField 
+				<CalendarField 
 					label="日期选择" 
-					placeholder="请选择日期" 
-					options={dateOptions}
-					value={selectedDate}
-					onChange={setSelectedDate}
+					selectedDate={selectedDate}
+					onDateSelect={setSelectedDate}
 					disabled={true}
 				/>
 				<DropdownField 
