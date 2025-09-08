@@ -506,8 +506,8 @@ body {
 	background: #fff;
 	border: 1px solid var(--border);
 	border-radius: 8px;
-	box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-	z-index: 10;
+	box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+	z-index: 1000;
 	max-height: 200px;
 	overflow-y: auto;
 	margin-top: 4px;
@@ -1063,4 +1063,452 @@ body {
 
 .confirm-btn:hover {
 	background: #dee2e6;
-} 
+}
+
+/* Booking Page Styles */
+.booking-page {
+	background: #f5f6f8;
+	min-height: calc(100vh - 48px);
+	padding-bottom: 100px;
+}
+
+.store-header {
+	background: #ff8c00;
+	color: white;
+	padding: 12px 16px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	font-size: 16px;
+	font-weight: 500;
+}
+
+.booking-form {
+	background: white;
+	margin: 8px 16px;
+	border-radius: 12px;
+	overflow: hidden;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.form-row {
+	display: flex;
+	align-items: center;
+	padding: 16px;
+	border-bottom: 1px solid #f0f0f0;
+}
+
+.form-row:last-child {
+	border-bottom: none;
+}
+
+.form-row label {
+	flex-shrink: 0;
+	width: 100px;
+	font-size: 16px;
+	color: var(--fg);
+	font-weight: 500;
+}
+
+.form-row input {
+	flex: 1;
+	border: none;
+	outline: none;
+	font-size: 16px;
+	text-align: right;
+	color: var(--fg);
+	background: transparent;
+}
+
+.form-row input::placeholder {
+	color: #c0c0c0;
+}
+
+.select-wrapper {
+	flex: 1;
+	position: relative;
+}
+
+.select-input {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	cursor: pointer;
+	padding: 4px 0;
+}
+
+.select-input span {
+	font-size: 16px;
+	color: var(--fg);
+}
+
+.select-input svg {
+	color: #c0c0c0;
+}
+
+.dropdown {
+	position: absolute;
+	top: 100%;
+	right: 0;
+	background: white;
+	border: 1px solid #e0e0e0;
+	border-radius: 8px;
+	box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+	z-index: 1000;
+	min-width: 100px;
+}
+
+.dropdown-item {
+	padding: 12px 16px;
+	font-size: 16px;
+	color: var(--fg);
+	cursor: pointer;
+	text-align: center;
+}
+
+.dropdown-item:hover {
+	background: #f5f6f8;
+}
+
+.booking-grid {
+	margin: 8px 16px;
+	background: white;
+	border-radius: 12px;
+	overflow-x: auto;
+	overflow-y: visible;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.grid-header {
+	display: grid;
+	grid-template-columns: 70px repeat(6, minmax(100px, 1fr));
+	background: #f8f9fa;
+	border-bottom: 1px solid #e0e0e0;
+	min-width: 670px;
+}
+
+.time-header, .venue-header {
+	padding: 12px 8px;
+	text-align: center;
+	font-size: 14px;
+	font-weight: 600;
+	color: var(--fg);
+	border-right: 1px solid #e0e0e0;
+}
+
+.time-header {
+	background: #f0f0f0;
+}
+
+.venue-header:last-child {
+	border-right: none;
+}
+
+.grid-row {
+	display: grid;
+	grid-template-columns: 70px repeat(6, minmax(100px, 1fr));
+	border-bottom: 1px solid #f0f0f0;
+	min-width: 670px;
+}
+
+.grid-row:last-child {
+	border-bottom: none;
+}
+
+.time-cell {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 6px 2px;
+	background: #f8f9fa;
+	border-right: 1px solid #e0e0e0;
+	font-size: 11px;
+	color: var(--fg);
+	text-align: center;
+	line-height: 1.1;
+}
+
+.venue-cell {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 6px 4px;
+	border-right: 1px solid #f0f0f0;
+	cursor: pointer;
+	min-height: 45px;
+	transition: all 0.2s;
+}
+
+.venue-cell:last-child {
+	border-right: none;
+}
+
+.venue-cell.selected {
+	background: #90EE90;
+}
+
+.venue-cell.unavailable {
+	background: #f8f9fa;
+	cursor: not-allowed;
+}
+
+.available-slot {
+	font-size: 14px;
+	font-weight: 600;
+	color: var(--fg);
+}
+
+.booked-slot {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 4px;
+}
+
+.booked-badge {
+	background: #ff4444;
+	color: white;
+	padding: 2px 6px;
+	border-radius: 4px;
+	font-size: 10px;
+	font-weight: 500;
+}
+
+.booked-contact {
+	font-size: 11px;
+	color: #888;
+	text-align: center;
+	line-height: 1.2;
+}
+
+.unavailable-text {
+	font-size: 12px;
+	color: #999;
+}
+
+.submit-section {
+	position: fixed;
+	bottom: 80px;
+	left: 16px;
+	right: 16px;
+	z-index: 10;
+}
+
+.submit-btn {
+	width: 100%;
+	background: #22c55e;
+	color: white;
+	border: none;
+	border-radius: 25px;
+	padding: 16px;
+	font-size: 18px;
+	font-weight: 600;
+	cursor: pointer;
+	transition: all 0.2s;
+	box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+}
+
+.submit-btn:hover {
+	background: #16a34a;
+	transform: translateY(-2px);
+	box-shadow: 0 6px 16px rgba(34, 197, 94, 0.4);
+}
+
+.submit-btn:active {
+	transform: translateY(0);
+}
+
+/* Publish Course Time Venue Grid Styles */
+.publish-course .booking-grid {
+	margin: 16px 0;
+	background: white;
+	border-radius: 12px;
+	overflow: hidden;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+	border: 1px solid #e0e0e0;
+}
+
+.publish-course .grid-header {
+	display: grid;
+	grid-template-columns: 70px repeat(6, minmax(100px, 1fr));
+	background: #f8f9fa;
+	border-bottom: 1px solid #e0e0e0;
+	min-width: 670px;
+}
+
+.publish-course .time-header, 
+.publish-course .venue-header {
+	padding: 10px 6px;
+	text-align: center;
+	font-size: 13px;
+	font-weight: 600;
+	color: var(--fg);
+	border-right: 1px solid #e0e0e0;
+}
+
+.publish-course .time-header {
+	background: #f0f0f0;
+}
+
+.publish-course .venue-header:last-child {
+	border-right: none;
+}
+
+.publish-course .grid-row {
+	display: grid;
+	grid-template-columns: 70px repeat(6, minmax(100px, 1fr));
+	border-bottom: 1px solid #f0f0f0;
+	min-width: 670px;
+}
+
+.publish-course .grid-row:last-child {
+	border-bottom: none;
+}
+
+.publish-course .time-cell {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 6px 2px;
+	background: #f8f9fa;
+	border-right: 1px solid #e0e0e0;
+	font-size: 11px;
+	color: var(--fg);
+	text-align: center;
+	line-height: 1.1;
+}
+
+.publish-course .venue-cell {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 6px 4px;
+	border-right: 1px solid #f0f0f0;
+	cursor: pointer;
+	min-height: 45px;
+	transition: all 0.2s;
+}
+
+.publish-course .venue-cell:last-child {
+	border-right: none;
+}
+
+.publish-course .venue-cell.selected {
+	background: #90EE90;
+}
+
+.publish-course .venue-cell.unavailable {
+	background: #f8f9fa;
+	cursor: not-allowed;
+}
+
+/* 可选择场地：黑色字体 */
+.publish-course .available-slot {
+	font-size: 14px;
+	font-weight: 600;
+	color: #000000;
+}
+
+/* 不可选择场地：灰色字体 */
+.publish-course .booked-slot {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 4px;
+}
+
+.publish-course .booked-badge {
+	background: #ff4444;
+	color: white;
+	padding: 2px 6px;
+	border-radius: 4px;
+	font-size: 10px;
+	font-weight: 500;
+}
+
+.publish-course .booked-contact {
+	font-size: 11px;
+	color: #999999;
+	text-align: center;
+	line-height: 1.2;
+}
+
+.publish-course .unavailable-text {
+	font-size: 14px;
+	color: #999999;
+	font-weight: 600;
+}
+
+/* 24小时时段网格滚动样式 */
+.publish-course .booking-grid {
+	max-height: 350px;
+	overflow-y: auto;
+	overflow-x: auto;
+	border: 1px solid #e0e0e0;
+	min-width: 100%;
+}
+
+/* 固定表头 */
+.publish-course .grid-header {
+	position: sticky;
+	top: 0;
+	z-index: 5;
+	box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* 滚动条样式 */
+.publish-course .booking-grid::-webkit-scrollbar {
+	width: 6px;
+}
+
+.publish-course .booking-grid::-webkit-scrollbar-track {
+	background: #f1f1f1;
+	border-radius: 3px;
+}
+
+.publish-course .booking-grid::-webkit-scrollbar-thumb {
+	background: #c1c1c1;
+	border-radius: 3px;
+}
+
+.publish-course .booking-grid::-webkit-scrollbar-thumb:hover {
+	background: #a8a8a8;
+}
+
+/* 水平滚动条样式 */
+.booking-grid::-webkit-scrollbar:horizontal {
+	height: 8px;
+}
+
+.booking-grid::-webkit-scrollbar-track:horizontal {
+	background: #f1f1f1;
+	border-radius: 4px;
+}
+
+.booking-grid::-webkit-scrollbar-thumb:horizontal {
+	background: #c1c1c1;
+	border-radius: 4px;
+}
+
+.booking-grid::-webkit-scrollbar-thumb:horizontal:hover {
+	background: #a8a8a8;
+}
+
+.publish-course .booking-grid::-webkit-scrollbar:horizontal {
+	height: 8px;
+}
+
+.publish-course .booking-grid::-webkit-scrollbar-track:horizontal {
+	background: #f1f1f1;
+	border-radius: 4px;
+}
+
+.publish-course .booking-grid::-webkit-scrollbar-thumb:horizontal {
+	background: #c1c1c1;
+	border-radius: 4px;
+}
+
+.publish-course .booking-grid::-webkit-scrollbar-thumb:horizontal:hover {
+	background: #a8a8a8;
+}

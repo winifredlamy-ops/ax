@@ -1,6 +1,27 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+// 定义场地数据类型
+interface Venue {
+  id: string
+  name: string
+}
+
+// 定义时段类型
+interface TimeSlot {
+  id: string
+  start: string
+  end: string
+}
+
+// 定义预订数据类型
+interface BookingSlot {
+  timeSlotId: string
+  venueId: string
+  available: boolean
+  bookedBy?: string
+}
+
 const Svg: React.FC<{ path: string; className?: string }> = ({ path, className }) => (
 	<svg className={className} viewBox="0 0 24 24" width="20" height="20" aria-hidden fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
 		<path d={path} />
@@ -15,6 +36,95 @@ const IconSend: React.FC = () => <Svg path="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z
 const storeOptions = [
 	"TT网球（福田中心店）",
 	"TT网球（南山中心店）"
+]
+
+// 模拟场地数据（去掉价格）
+const venues: Venue[] = [
+  { id: '1', name: '1号场' },
+  { id: '2', name: '2号场' },
+  { id: '3', name: '3号场' },
+  { id: '4', name: '4号场' },
+  { id: '5', name: '5号场' },
+  { id: '6', name: '6号场' },
+]
+
+// 模拟时段数据 - 24小时可选择
+const timeSlots: TimeSlot[] = [
+  { id: '0000-0030', start: '00:00', end: '00:30' },
+  { id: '0030-0100', start: '00:30', end: '01:00' },
+  { id: '0100-0130', start: '01:00', end: '01:30' },
+  { id: '0130-0200', start: '01:30', end: '02:00' },
+  { id: '0200-0230', start: '02:00', end: '02:30' },
+  { id: '0230-0300', start: '02:30', end: '03:00' },
+  { id: '0300-0330', start: '03:00', end: '03:30' },
+  { id: '0330-0400', start: '03:30', end: '04:00' },
+  { id: '0400-0430', start: '04:00', end: '04:30' },
+  { id: '0430-0500', start: '04:30', end: '05:00' },
+  { id: '0500-0530', start: '05:00', end: '05:30' },
+  { id: '0530-0600', start: '05:30', end: '06:00' },
+  { id: '0600-0630', start: '06:00', end: '06:30' },
+  { id: '0630-0700', start: '06:30', end: '07:00' },
+  { id: '0700-0730', start: '07:00', end: '07:30' },
+  { id: '0730-0800', start: '07:30', end: '08:00' },
+  { id: '0800-0830', start: '08:00', end: '08:30' },
+  { id: '0830-0900', start: '08:30', end: '09:00' },
+  { id: '0900-0930', start: '09:00', end: '09:30' },
+  { id: '0930-1000', start: '09:30', end: '10:00' },
+  { id: '1000-1030', start: '10:00', end: '10:30' },
+  { id: '1030-1100', start: '10:30', end: '11:00' },
+  { id: '1100-1130', start: '11:00', end: '11:30' },
+  { id: '1130-1200', start: '11:30', end: '12:00' },
+  { id: '1200-1230', start: '12:00', end: '12:30' },
+  { id: '1230-1300', start: '12:30', end: '13:00' },
+  { id: '1300-1330', start: '13:00', end: '13:30' },
+  { id: '1330-1400', start: '13:30', end: '14:00' },
+  { id: '1400-1430', start: '14:00', end: '14:30' },
+  { id: '1430-1500', start: '14:30', end: '15:00' },
+  { id: '1500-1530', start: '15:00', end: '15:30' },
+  { id: '1530-1600', start: '15:30', end: '16:00' },
+  { id: '1600-1630', start: '16:00', end: '16:30' },
+  { id: '1630-1700', start: '16:30', end: '17:00' },
+  { id: '1700-1730', start: '17:00', end: '17:30' },
+  { id: '1730-1800', start: '17:30', end: '18:00' },
+  { id: '1800-1830', start: '18:00', end: '18:30' },
+  { id: '1830-1900', start: '18:30', end: '19:00' },
+  { id: '1900-1930', start: '19:00', end: '19:30' },
+  { id: '1930-2000', start: '19:30', end: '20:00' },
+  { id: '2000-2030', start: '20:00', end: '20:30' },
+  { id: '2030-2100', start: '20:30', end: '21:00' },
+  { id: '2100-2130', start: '21:00', end: '21:30' },
+  { id: '2130-2200', start: '21:30', end: '22:00' },
+  { id: '2200-2230', start: '22:00', end: '22:30' },
+  { id: '2230-2300', start: '22:30', end: '23:00' },
+  { id: '2300-2330', start: '23:00', end: '23:30' },
+  { id: '2330-0000', start: '23:30', end: '24:00' },
+]
+
+// 模拟预订状态数据 - 只有少量时段被预订，其他都可用
+const mockBookings: BookingSlot[] = [
+  // 早晨时段 - 部分被预订
+  { timeSlotId: '0800-0830', venueId: '1', available: false, bookedBy: '微信付款 早起鸟 13111111111' },
+  { timeSlotId: '0800-0830', venueId: '2', available: false, bookedBy: 'Don 13410751228' },
+  { timeSlotId: '0900-0930', venueId: '5', available: false, bookedBy: '微信付款 李教练 18575583233' },
+  { timeSlotId: '0930-1000', venueId: '6', available: false, bookedBy: '微信付款 晨练者 13222222222' },
+  
+  // 中午时段 - 部分被预订
+  { timeSlotId: '1100-1130', venueId: '2', available: false, bookedBy: 'Don 13410751228' },
+  { timeSlotId: '1100-1130', venueId: '5', available: false, bookedBy: '微信付款 18575583233' },
+  { timeSlotId: '1200-1230', venueId: '1', available: false, bookedBy: '微信付款 午餐队 13333333333' },
+  { timeSlotId: '1200-1230', venueId: '5', available: false, bookedBy: '微信付款 解小客 18823824315' },
+  { timeSlotId: '1230-1300', venueId: '5', available: false, bookedBy: '微信付款 解小客 18823824315' },
+  
+  // 下午时段 - 部分被预订
+  { timeSlotId: '1500-1530', venueId: '3', available: false, bookedBy: '微信付款 王教练 13912345678' },
+  { timeSlotId: '1600-1630', venueId: '6', available: false, bookedBy: '微信付款 下午茶 13444444444' },
+  { timeSlotId: '1800-1830', venueId: '4', available: false, bookedBy: '微信付款 张学员 15987654321' },
+  
+  // 晚上时段 - 部分被预订
+  { timeSlotId: '1900-1930', venueId: '1', available: false, bookedBy: '微信付款 夜猫子 13555555555' },
+  { timeSlotId: '1900-1930', venueId: '2', available: false, bookedBy: '微信付款 陈教练 18611112222' },
+  { timeSlotId: '2000-2030', venueId: '3', available: false, bookedBy: '微信付款 刘学员 13666667777' },
+  { timeSlotId: '2100-2130', venueId: '6', available: false, bookedBy: '微信付款 夜场王 13777777777' },
 ]
 
 const dateOptions = [
@@ -129,6 +239,81 @@ const remarkTemplates = [
 	"青少年学员"
 ]
 
+// 时段和场地网格组件
+const TimeVenueGrid: React.FC<{
+	selectedSlot: { timeSlotId: string, venueId: string } | null
+	onSlotSelect: (timeSlotId: string, venueId: string) => void
+}> = ({ selectedSlot, onSlotSelect }) => {
+	// 获取特定时段和场地的预订状态
+	const getBookingStatus = (timeSlotId: string, venueId: string) => {
+		return mockBookings.find(b => b.timeSlotId === timeSlotId && b.venueId === venueId)
+	}
+
+	// 处理时段选择
+	const handleSlotSelect = (timeSlotId: string, venueId: string) => {
+		const booking = getBookingStatus(timeSlotId, venueId)
+		if (booking?.available !== false) {
+			onSlotSelect(timeSlotId, venueId)
+		}
+	}
+
+	return (
+		<div className="form-field">
+			<label className="field-label">时段和场地选择</label>
+			<div className="booking-grid">
+				<div className="grid-header">
+					<div className="time-header">时段</div>
+					{venues.map(venue => (
+						<div key={venue.id} className="venue-header">
+							{venue.name}
+						</div>
+					))}
+				</div>
+
+				{timeSlots.map(timeSlot => (
+					<div key={timeSlot.id} className="grid-row">
+						<div className="time-cell">
+							<div className="time-range">
+								{timeSlot.start}<br />~<br />{timeSlot.end}
+							</div>
+						</div>
+						{venues.map(venue => {
+							const booking = getBookingStatus(timeSlot.id, venue.id)
+							const isSelected = selectedSlot?.timeSlotId === timeSlot.id && selectedSlot?.venueId === venue.id
+							const isAvailable = booking?.available !== false
+							
+							return (
+								<div 
+									key={venue.id}
+									className={`venue-cell ${!isAvailable ? 'unavailable' : ''} ${isSelected ? 'selected' : ''}`}
+									onClick={() => handleSlotSelect(timeSlot.id, venue.id)}
+								>
+									{isAvailable ? (
+										<div className="available-slot">
+											可选
+										</div>
+									) : (
+										<div className="booked-slot">
+											{booking?.bookedBy ? (
+												<div className="booked-info">
+													<div className="booked-badge">微信付款</div>
+													<div className="booked-contact">{booking.bookedBy.replace('微信付款 ', '')}</div>
+												</div>
+											) : (
+												<div className="unavailable-text">不可用</div>
+											)}
+										</div>
+									)}
+								</div>
+							)
+						})}
+					</div>
+				))}
+			</div>
+		</div>
+	)
+}
+
 const RemarkField: React.FC<{ 
 	label: string; 
 	placeholder: string;
@@ -197,12 +382,18 @@ export const PublishCourse: React.FC = () => {
 	const [selectedStore, setSelectedStore] = useState('')
 	const [selectedCourse, setSelectedCourse] = useState('')
 	const [remarks, setRemarks] = useState('')
+	const [selectedSlot, setSelectedSlot] = useState<{ timeSlotId: string, venueId: string } | null>(null)
 	
 	// Check if we're in edit mode
 	const urlParams = new URLSearchParams(window.location.search)
 	const isEditMode = urlParams.get('mode') === 'edit'
 	const editId = urlParams.get('id')
 	
+	// 处理时段选择
+	const handleSlotSelect = (timeSlotId: string, venueId: string) => {
+		setSelectedSlot({ timeSlotId, venueId })
+	}
+
 	// Pre-fill data if in edit mode
 	React.useEffect(() => {
 		if (isEditMode && editId) {
@@ -232,13 +423,15 @@ export const PublishCourse: React.FC = () => {
 					onChange={setSelectedDate}
 					disabled={isEditMode}
 				/>
-				<DropdownField 
-					label="时间选择" 
-					placeholder="请选择时间" 
-					options={timeOptions}
-					value={selectedTime}
-					onChange={setSelectedTime}
-				/>
+				
+				{/* 当选择了日期后，显示时段和场地网格 */}
+				{selectedDate && (
+					<TimeVenueGrid 
+						selectedSlot={selectedSlot}
+						onSlotSelect={handleSlotSelect}
+					/>
+				)}
+				
 				<RadioField 
 					label="网球门店" 
 					options={storeOptions}
