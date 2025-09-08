@@ -165,6 +165,51 @@ const RemarkField: React.FC<{
 	)
 }
 
+// 学员信息输入字段组件
+const StudentInfoField: React.FC<{ 
+	phoneLabel: string; 
+	phonePlaceholder: string;
+	phoneValue: string;
+	onPhoneChange: (value: string) => void;
+	nicknameLabel: string;
+	nicknamePlaceholder: string;
+	nicknameValue: string;
+	onNicknameChange: (value: string) => void;
+	disabled?: boolean;
+}> = ({ phoneLabel, phonePlaceholder, phoneValue, onPhoneChange, nicknameLabel, nicknamePlaceholder, nicknameValue, onNicknameChange, disabled = false }) => {
+	return (
+		<div className="student-info-fields">
+			<div className="form-field">
+				<label className="field-label">{phoneLabel}</label>
+				<div className="field-input">
+					<input 
+						type="text" 
+						className={`input-text ${disabled ? 'disabled' : ''}`}
+						placeholder={phonePlaceholder}
+						value={phoneValue}
+						onChange={(e) => !disabled && onPhoneChange(e.target.value)}
+						disabled={disabled}
+					/>
+				</div>
+				<div className="field-hint">支持输入四位尾号快速查找</div>
+			</div>
+			<div className="form-field">
+				<label className="field-label">{nicknameLabel}</label>
+				<div className="field-input">
+					<input 
+						type="text" 
+						className={`input-text ${disabled ? 'disabled' : ''}`}
+						placeholder={nicknamePlaceholder}
+						value={nicknameValue}
+						onChange={(e) => !disabled && onNicknameChange(e.target.value)}
+						disabled={disabled}
+					/>
+				</div>
+			</div>
+		</div>
+	)
+}
+
 export const EditReservation: React.FC = () => {
 	const navigate = useNavigate()
 	const { id } = useParams()
@@ -172,7 +217,52 @@ export const EditReservation: React.FC = () => {
 	const [selectedTime, setSelectedTime] = useState('')
 	const [selectedStore, setSelectedStore] = useState('')
 	const [selectedCourse, setSelectedCourse] = useState('')
+	const [studentPhone, setStudentPhone] = useState('')
+	const [studentNickname, setStudentNickname] = useState('')
 	const [remarks, setRemarks] = useState('')
+	
+	// 模拟学员数据库
+	const studentDatabase = [
+		{ phone: '13111111111', nickname: '早起鸟' },
+		{ phone: '13410751228', nickname: 'Don' },
+		{ phone: '18575583233', nickname: '李教练' },
+		{ phone: '13222222222', nickname: '晨练者' },
+		{ phone: '13333333333', nickname: '午餐队' },
+		{ phone: '18823824315', nickname: '解小客' },
+		{ phone: '13912345678', nickname: '王教练' },
+		{ phone: '13444444444', nickname: '下午茶' },
+		{ phone: '15987654321', nickname: '张学员' },
+		{ phone: '13555555555', nickname: '夜猫子' },
+		{ phone: '18611112222', nickname: '陈教练' },
+		{ phone: '13666667777', nickname: '刘学员' },
+		{ phone: '13777777777', nickname: '夜场王' },
+	]
+	
+	// 处理手机号输入和查找
+	const handlePhoneChange = (value: string) => {
+		setStudentPhone(value)
+		
+		// 如果输入的是4位数字，尝试查找完整手机号
+		if (value.length === 4 && /^\d{4}$/.test(value)) {
+			const foundStudent = studentDatabase.find(student => 
+				student.phone.endsWith(value)
+			)
+			if (foundStudent) {
+				setStudentPhone(foundStudent.phone)
+				setStudentNickname(foundStudent.nickname)
+			}
+		}
+		
+		// 如果输入完整手机号，查找对应昵称
+		if (value.length === 11 && /^\d{11}$/.test(value)) {
+			const foundStudent = studentDatabase.find(student => 
+				student.phone === value
+			)
+			if (foundStudent) {
+				setStudentNickname(foundStudent.nickname)
+			}
+		}
+	}
 	
 	// Pre-fill data for editing
 	useEffect(() => {
@@ -186,6 +276,14 @@ export const EditReservation: React.FC = () => {
 	return (
 		<div className="page publish-course">
 			<div className="publish-content">
+				<RadioField 
+					label="网球门店" 
+					options={storeOptions}
+					value={selectedStore}
+					onChange={setSelectedStore}
+					disabled={true}
+				/>
+				
 				<DropdownField 
 					label="日期选择" 
 					placeholder="请选择日期" 
@@ -202,19 +300,25 @@ export const EditReservation: React.FC = () => {
 					onChange={setSelectedTime}
 				/>
 				<RadioField 
-					label="网球门店" 
-					options={storeOptions}
-					value={selectedStore}
-					onChange={setSelectedStore}
-					disabled={true}
-				/>
-				<RadioField 
 					label="课程选择" 
 					options={courseOptions}
 					value={selectedCourse}
 					onChange={setSelectedCourse}
 					disabled={true}
 				/>
+				
+				<StudentInfoField 
+					phoneLabel="学员手机号"
+					phonePlaceholder="请输入手机号或四位尾号"
+					phoneValue={studentPhone}
+					onPhoneChange={handlePhoneChange}
+					nicknameLabel="学员昵称"
+					nicknamePlaceholder="请输入学员昵称"
+					nicknameValue={studentNickname}
+					onNicknameChange={setStudentNickname}
+					disabled={true}
+				/>
+				
 				<RemarkField 
 					label="备注 (选填)" 
 					placeholder="输入学员情况、注意事项等"
