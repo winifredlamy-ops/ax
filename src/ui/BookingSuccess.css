@@ -1,0 +1,342 @@
+.booking-success-page {
+  min-height: 100vh;
+  background: #f5f5f5;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 顶部导航栏 */
+.success-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: white;
+  border-bottom: 1px solid #e5e7eb;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.back-btn, .user-btn {
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+}
+
+.back-btn:hover, .user-btn:hover {
+  background: #f3f4f6;
+}
+
+.header-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0;
+}
+
+/* 时间显示 */
+.current-time {
+  text-align: center;
+  padding: 20px 16px;
+  font-size: 16px;
+  color: #6b7280;
+  background: white;
+  margin-bottom: 20px;
+}
+
+/* 成功通知卡片 */
+.success-card {
+  background: white;
+  margin: 0 16px 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 20px 16px;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.success-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0;
+}
+
+.more-btn {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background-color 0.2s;
+  color: #6b7280;
+}
+
+.more-btn:hover {
+  background: #f3f4f6;
+}
+
+/* 预约详情 */
+.booking-details {
+  padding: 16px 20px 24px;
+}
+
+.detail-row {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+.detail-row:last-child {
+  margin-bottom: 0;
+}
+
+.detail-label {
+  width: 80px;
+  flex-shrink: 0;
+  font-size: 14px;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.detail-value {
+  flex: 1;
+  font-size: 14px;
+  color: #1f2937;
+  font-weight: 500;
+}
+
+/* 底部品牌信息 */
+.bottom-branding {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background: white;
+  margin: 0 16px 30px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.brand-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.brand-icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brand-name {
+  font-size: 14px;
+  color: #1f2937;
+  font-weight: 500;
+}
+
+.miniprogram-tag {
+  font-size: 12px;
+  color: #6b7280;
+  background: #f3f4f6;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-weight: 500;
+}
+
+/* 操作按钮 */
+.success-actions {
+  padding: 0 16px 30px;
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.primary-btn, .secondary-btn {
+  width: 100%;
+  padding: 14px 24px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+}
+
+.primary-btn {
+  background: #3b82f6;
+  color: white;
+}
+
+.primary-btn:hover {
+  background: #2563eb;
+  transform: translateY(-1px);
+}
+
+.secondary-btn {
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+.secondary-btn:hover {
+  background: #e5e7eb;
+  color: #4b5563;
+}
+
+/* 移动端适配 */
+@media (max-width: 480px) {
+  .success-header {
+    padding: 10px 12px;
+  }
+  
+  .header-title {
+    font-size: 16px;
+  }
+  
+  .current-time {
+    padding: 16px 12px;
+    font-size: 14px;
+  }
+  
+  .success-card {
+    margin: 0 12px 16px;
+    border-radius: 8px;
+  }
+  
+  .card-header {
+    padding: 16px 16px 12px;
+  }
+  
+  .success-title {
+    font-size: 16px;
+  }
+  
+  .booking-details {
+    padding: 12px 16px 20px;
+  }
+  
+  .detail-row {
+    margin-bottom: 12px;
+  }
+  
+  .detail-label {
+    width: 70px;
+    font-size: 13px;
+  }
+  
+  .detail-value {
+    font-size: 13px;
+  }
+  
+  .bottom-branding {
+    margin: 0 12px 20px;
+    padding: 12px 16px;
+    border-radius: 8px;
+  }
+  
+  .success-actions {
+    padding: 0 12px 20px;
+    gap: 10px;
+  }
+  
+  .primary-btn, .secondary-btn {
+    padding: 12px 20px;
+    font-size: 15px;
+  }
+}
+
+/* 深色模式支持 */
+@media (prefers-color-scheme: dark) {
+  .booking-success-page {
+    background: #111827;
+  }
+  
+  .success-header {
+    background: #1f2937;
+    border-bottom-color: #374151;
+  }
+  
+  .header-title {
+    color: #f9fafb;
+  }
+  
+  .back-btn:hover, .user-btn:hover {
+    background: #374151;
+  }
+  
+  .current-time {
+    background: #1f2937;
+    color: #9ca3af;
+  }
+  
+  .success-card, .bottom-branding {
+    background: #1f2937;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+  
+  .card-header {
+    border-bottom-color: #374151;
+  }
+  
+  .success-title {
+    color: #f9fafb;
+  }
+  
+  .more-btn {
+    color: #9ca3af;
+  }
+  
+  .more-btn:hover {
+    background: #374151;
+  }
+  
+  .detail-label {
+    color: #9ca3af;
+  }
+  
+  .detail-value {
+    color: #f9fafb;
+  }
+  
+  .brand-name {
+    color: #f9fafb;
+  }
+  
+  .miniprogram-tag {
+    background: #374151;
+    color: #9ca3af;
+  }
+  
+  .secondary-btn {
+    background: #374151;
+    color: #9ca3af;
+  }
+  
+  .secondary-btn:hover {
+    background: #4b5563;
+    color: #d1d5db;
+  }
+}

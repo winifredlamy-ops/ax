@@ -820,7 +820,7 @@ export const PublishCourse: React.FC = () => {
 					<IconSave />
 					<span>保存</span>
 				</button>
-				<button className="publish-btn" onClick={() => navigate('/reservation')}>
+				<button className="publish-btn" onClick={() => navigate(isEditMode ? '/reservation' : '/booking-success')}>
 					<IconSend />
 					<span>{isEditMode ? '确认修改' : '立即发布'}</span>
 				</button>
