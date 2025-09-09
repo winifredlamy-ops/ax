@@ -16,6 +16,7 @@ const IconImage: React.FC = () => <Svg path="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 
 const IconEdit: React.FC = () => <Svg path="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
 const IconX: React.FC = () => <Svg path="M18 6L6 18M6 6l12 12" />
 const IconCourt: React.FC = () => <Svg path="M3 3h18v18H3V3zm2 2v14h14V5H5zm2 2h10v10H7V7zm2 2v6h6V9H9z" />
+const IconPhone: React.FC = () => <Svg path="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92Z" />
 
 // 取消订单确认弹窗组件
 const CancelOrderModal: React.FC<{
@@ -53,6 +54,14 @@ export const ReservationDetail: React.FC = () => {
 	// For demo purposes: IDs 1,2,3 are pending, 4,5 are accepted
 	const isPending = id && ['1', '2', '3'].includes(id)
 	
+	// 模拟学员数据
+	const studentInfo = {
+		name: isPending ? '李同学' : '张同学',
+		phone: isPending ? '139****8888' : '138****5678',
+		level: isPending ? '中级' : '初学者',
+		note: isPending ? '有一定基础，希望提高技术水平' : '掌握正反手基础知识但不熟练'
+	}
+	
 	const handleCancelOrder = () => {
 		setShowCancelModal(true)
 	}
@@ -65,6 +74,11 @@ export const ReservationDetail: React.FC = () => {
 	
 	const handleCloseCancelModal = () => {
 		setShowCancelModal(false)
+	}
+	
+	const handleCallStudent = () => {
+		// 这里可以添加拨打电话逻辑
+		alert('拨打学员电话')
 	}
 	
 	return (
@@ -116,6 +130,35 @@ export const ReservationDetail: React.FC = () => {
 								</div>
 							</div>
 						)}
+					</div>
+				</div>
+				
+				{/* 学员信息卡片 */}
+				<div className="detail-card">
+					<div className="student-info">
+						<h3 className="student-title">学员信息</h3>
+						<div className="student-details">
+							<div className="student-header">
+								<div className="student-avatar">
+									<IconPerson />
+								</div>
+								<div className="student-basic">
+									<div className="student-name">{studentInfo.name}</div>
+									<div className="student-level">{studentInfo.level}</div>
+								</div>
+								<button className="call-btn" onClick={handleCallStudent}>
+									<IconPhone />
+								</button>
+							</div>
+							<div className="student-contact">
+								<span className="phone-label">联系电话：</span>
+								<span className="phone-number">{studentInfo.phone}</span>
+							</div>
+							<div className="student-note">
+								<div className="note-label">学员备注：</div>
+								<div className="note-content">{studentInfo.note}</div>
+							</div>
+						</div>
 					</div>
 				</div>
 				

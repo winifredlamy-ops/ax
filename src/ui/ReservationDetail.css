@@ -119,6 +119,119 @@
 	color: var(--muted);
 }
 
+/* 学员信息样式 */
+.student-info {
+	text-align: left;
+}
+
+.student-title {
+	margin: 0 0 16px 0;
+	font-size: 16px;
+	font-weight: 600;
+	color: var(--fg);
+}
+
+.student-details {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+.student-header {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
+.student-avatar {
+	width: 48px;
+	height: 48px;
+	background: #f3f4f6;
+	border-radius: 24px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+}
+
+.student-avatar svg {
+	width: 24px;
+	height: 24px;
+	color: #6b7280;
+}
+
+.student-basic {
+	flex: 1;
+}
+
+.student-name {
+	font-size: 16px;
+	font-weight: 600;
+	color: var(--fg);
+	margin-bottom: 4px;
+}
+
+.student-level {
+	font-size: 14px;
+	color: var(--muted);
+}
+
+.call-btn {
+	width: 40px;
+	height: 40px;
+	background: #3b82f6;
+	border: none;
+	border-radius: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	transition: background-color 0.2s;
+}
+
+.call-btn:hover {
+	background: #2563eb;
+}
+
+.call-btn svg {
+	width: 20px;
+	height: 20px;
+	color: white;
+}
+
+.student-contact {
+	padding: 12px 16px;
+	background: #f9fafb;
+	border-radius: 8px;
+	font-size: 14px;
+}
+
+.phone-label {
+	color: var(--muted);
+}
+
+.phone-number {
+	color: var(--fg);
+	font-weight: 500;
+}
+
+.student-note {
+	border-top: 1px solid #f3f4f6;
+	padding-top: 16px;
+}
+
+.note-label {
+	font-size: 14px;
+	color: var(--muted);
+	margin-bottom: 8px;
+}
+
+.note-content {
+	font-size: 14px;
+	color: var(--fg);
+	line-height: 1.5;
+}
+
 .order-info {
 	background: #fff;
 	border-radius: 12px;
