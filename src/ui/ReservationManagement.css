@@ -125,9 +125,9 @@
 
 .card-footer {
 	display: flex;
-	justify-content: space-between;
 	align-items: center;
 	margin-top: 12px;
+	padding-right: 12px; /* 与card-header的padding保持一致 */
 }
 
 .details-btn {
@@ -144,6 +144,8 @@
 	font-size: 14px;
 	color: #d97706;
 	font-weight: 500;
+	margin-left: auto; /* 推到右边 */
+	text-align: right;
 }
 
 .info-row {
