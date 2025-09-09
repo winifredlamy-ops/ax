@@ -18,6 +18,7 @@ const IconX: React.FC = () => <Svg path="M18 6L6 18M6 6l12 12" />
 const IconCourt: React.FC = () => <Svg path="M3 3h18v18H3V3zm2 2v14h14V5H5zm2 2h10v10H7V7zm2 2v6h6V9H9z" />
 const IconPhone: React.FC = () => <Svg path="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92Z" />
 const IconBook: React.FC = () => <Svg path="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5H6.5A2.5 2.5 0 0 1 4 14.5v5zM4 19.5V4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v13H6.5A2.5 2.5 0 0 0 4 19.5z" />
+const IconArrowLeft: React.FC = () => <Svg path="M19 12H5M12 19l-7-7 7-7" />
 
 // 取消订单确认弹窗组件
 const CancelOrderModal: React.FC<{
@@ -84,8 +85,16 @@ export const ReservationDetail: React.FC = () => {
 	
 	return (
 		<div className="page reservation-detail-new">
+			{/* 顶部导航栏 */}
+			<div className="order-header">
+				<button className="back-btn" onClick={() => navigate(-1)}>
+					<IconArrowLeft />
+				</button>
+				<h1 className="header-title">预约详情</h1>
+				<div className="header-placeholder"></div>
+			</div>
+			
 			<div className="detail-content">
-				<h2 className="detail-title-simple">订单详情</h2>
 				<div className="detail-card">
 					
 					<div className="course-info">
