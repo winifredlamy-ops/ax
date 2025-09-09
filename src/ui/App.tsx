@@ -10,7 +10,6 @@ import { ReservationDetail } from './ReservationDetail'
 import { PublishCourse } from './PublishCourse'
 import { EditReservation } from './EditReservation'
 import { BookingSuccess } from './BookingSuccess'
-import { OrderDetail } from './OrderDetail'
 
 const Svg: React.FC<{ path: string; className?: string }> = ({ path, className }) => (
 	<svg className={className} viewBox="0 0 24 24" width="20" height="20" aria-hidden>
@@ -46,7 +45,6 @@ export const App: React.FC = () => {
 					<Route path="/edit-reservation/:id" element={<EditReservation />} />
 					<Route path="/publish" element={<PublishCourse />} />
 					<Route path="/booking-success" element={<BookingSuccess />} />
-					<Route path="/order-detail" element={<OrderDetail />} />
 					<Route path="*" element={<Navigate to="/home" replace />} />
 				</Routes>
 			</div>

@@ -52,7 +52,7 @@ export const BookingSuccess: React.FC = () => {
 			</div>
 
 			{/* 成功通知卡片 */}
-			<div className="success-card" onClick={() => navigate('/order-detail')}>
+			<div className="success-card" onClick={() => navigate('/reservation/1')}>
 				<div className="card-header">
 					<h2 className="success-title">发布成功通知</h2>
 					<button className="more-btn">
