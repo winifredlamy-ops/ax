@@ -115,6 +115,11 @@ export const ReservationManagement: React.FC = () => {
 	
 	return (
 		<div className="page reservation-management">
+			{/* 顶部标题栏 */}
+			<div className="reservation-header">
+				<h1 className="page-title">我的约课</h1>
+			</div>
+			
 			<div className="reservation-content">
 				{reservations.map(reservation => (
 					<ReservationCard key={reservation.id} reservation={reservation} />

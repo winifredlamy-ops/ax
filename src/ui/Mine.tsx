@@ -47,6 +47,10 @@ export const Mine: React.FC = () => {
 	const navigate = useNavigate()
 	return (
 		<div className="page mine compact">
+			{/* 顶部标题栏 */}
+			<div className="mine-header">
+				<h1 className="page-title">我的</h1>
+			</div>
 			<div className="card balance">
 				<div className="balance-left">余额</div>
 				<div className="balance-right">

@@ -1,4 +1,30 @@
 /* Mine组件相关样式 */
+
+/* 顶部标题栏 */
+.mine-header {
+	background: white;
+	padding: 16px 20px;
+	border-bottom: 1px solid #e5e7eb;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 100;
+}
+
+.mine-header .page-title {
+	font-size: 20px;
+	font-weight: 600;
+	color: #1f2937;
+	margin: 0;
+	text-align: center;
+}
+
+/* 为固定标题栏添加顶部间距 */
+.mine.compact {
+	padding-top: 73px; /* 为固定导航栏留出空间 */
+}
+
 .card.balance {
 	display: flex;
 	align-items: center;
