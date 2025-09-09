@@ -96,21 +96,6 @@ export const BookingSuccess: React.FC = () => {
 				</div>
 			</div>
 
-			{/* 操作按钮 */}
-			<div className="success-actions">
-				<button 
-					className="primary-btn"
-					onClick={() => navigate('/reservation')}
-				>
-					查看我的预约
-				</button>
-				<button 
-					className="secondary-btn"
-					onClick={() => navigate('/home')}
-				>
-					返回首页
-				</button>
-			</div>
 		</div>
 	)
 }

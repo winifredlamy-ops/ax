@@ -166,45 +166,6 @@
   font-weight: 500;
 }
 
-/* 操作按钮 */
-.success-actions {
-  padding: 0 16px 30px;
-  margin-top: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.primary-btn, .secondary-btn {
-  width: 100%;
-  padding: 14px 24px;
-  border-radius: 12px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s;
-  border: none;
-}
-
-.primary-btn {
-  background: #3b82f6;
-  color: white;
-}
-
-.primary-btn:hover {
-  background: #2563eb;
-  transform: translateY(-1px);
-}
-
-.secondary-btn {
-  background: #f3f4f6;
-  color: #6b7280;
-}
-
-.secondary-btn:hover {
-  background: #e5e7eb;
-  color: #4b5563;
-}
 
 /* 移动端适配 */
 @media (max-width: 480px) {
@@ -257,15 +218,6 @@
     border-radius: 8px;
   }
   
-  .success-actions {
-    padding: 0 12px 20px;
-    gap: 10px;
-  }
-  
-  .primary-btn, .secondary-btn {
-    padding: 12px 20px;
-    font-size: 15px;
-  }
 }
 
 /* 深色模式支持 */
@@ -330,13 +282,4 @@
     color: #9ca3af;
   }
   
-  .secondary-btn {
-    background: #374151;
-    color: #9ca3af;
-  }
-  
-  .secondary-btn:hover {
-    background: #4b5563;
-    color: #d1d5db;
-  }
 }
