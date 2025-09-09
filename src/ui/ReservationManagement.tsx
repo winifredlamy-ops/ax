@@ -12,6 +12,7 @@ const IconLightning: React.FC = () => <Svg path="M13 2L3 14h9l-1 8 10-12h-9l1-8z
 const IconMapPin: React.FC = () => <Svg path="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
 const IconPerson: React.FC = () => <Svg path="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" />
 const IconPlus: React.FC = () => <Svg path="M12 5v14M5 12h14" />
+const IconArrowLeft: React.FC = () => <Svg path="M19 12H5M12 19l-7-7 7-7" />
 
 interface Reservation {
 	id: number
@@ -117,7 +118,11 @@ export const ReservationManagement: React.FC = () => {
 		<div className="page reservation-management">
 			{/* 顶部标题栏 */}
 			<div className="reservation-header">
+				<button className="back-btn" onClick={() => navigate(-1)}>
+					<IconArrowLeft />
+				</button>
 				<h1 className="page-title">我的约课</h1>
+				<div className="header-placeholder"></div>
 			</div>
 			
 			<div className="reservation-content">

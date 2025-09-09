@@ -10,6 +10,30 @@
 	left: 0;
 	right: 0;
 	z-index: 100;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.back-btn {
+	background: none;
+	border: none;
+	padding: 8px;
+	border-radius: 8px;
+	cursor: pointer;
+	color: #374151;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: background-color 0.2s;
+}
+
+.back-btn:hover {
+	background-color: #f3f4f6;
+}
+
+.back-btn:active {
+	background-color: #e5e7eb;
 }
 
 .page-title {
@@ -17,7 +41,12 @@
 	font-weight: 600;
 	color: #1f2937;
 	margin: 0;
+	flex: 1;
 	text-align: center;
+}
+
+.header-placeholder {
+	width: 36px; /* 与返回按钮宽度相同，保持布局平衡 */
 }
 
 .reservation-content {
