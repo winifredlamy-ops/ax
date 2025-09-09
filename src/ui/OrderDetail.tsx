@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './ReservationDetail.css'
 
@@ -16,8 +16,36 @@ const IconX: React.FC = () => <Svg path="M18 6L6 18M6 6l12 12" />
 const IconCourt: React.FC = () => <Svg path="M3 3h18v18H3V3zm2 2v14h14V5H5zm2 2h10v10H7V7zm2 2v6h6V9H9z" />
 const IconPhone: React.FC = () => <Svg path="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92Z" />
 
+// 取消订单确认弹窗组件
+const CancelOrderModal: React.FC<{
+	isOpen: boolean;
+	onClose: () => void;
+	onConfirm: () => void;
+}> = ({ isOpen, onClose, onConfirm }) => {
+	if (!isOpen) return null;
+
+	return (
+		<div className="modal-overlay" onClick={onClose}>
+			<div className="cancel-modal" onClick={(e) => e.stopPropagation()}>
+				<div className="modal-header">
+					<h3>提示</h3>
+				</div>
+				<div className="modal-content">
+					<p className="cancelled-message">课程已取消</p>
+				</div>
+				<div className="modal-actions">
+					<button className="modal-btn primary single" onClick={onConfirm}>
+						确定
+					</button>
+				</div>
+			</div>
+		</div>
+	);
+};
+
 export const OrderDetail: React.FC = () => {
 	const navigate = useNavigate()
+	const [showCancelModal, setShowCancelModal] = useState(false)
 	
 	// 模拟订单数据
 	const orderInfo = {
@@ -43,11 +71,17 @@ export const OrderDetail: React.FC = () => {
 	}
 
 	const handleCancelOrder = () => {
-		// 这里可以添加取消订单逻辑
-		if (confirm('确定要取消这个订单吗？')) {
-			alert('订单已取消')
-			navigate('/reservation')
-		}
+		setShowCancelModal(true)
+	}
+	
+	const handleConfirmCancel = () => {
+		setShowCancelModal(false)
+		// 这里可以添加实际的取消订单逻辑
+		navigate('/reservation')
+	}
+	
+	const handleCloseCancelModal = () => {
+		setShowCancelModal(false)
 	}
 
 	const handleCallStudent = () => {
@@ -137,6 +171,12 @@ export const OrderDetail: React.FC = () => {
 					<span>取消订单</span>
 				</button>
 			</div>
+			
+			<CancelOrderModal 
+				isOpen={showCancelModal}
+				onClose={handleCloseCancelModal}
+				onConfirm={handleConfirmCancel}
+			/>
 		</div>
 	)
 }
