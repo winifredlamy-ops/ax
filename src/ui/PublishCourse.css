@@ -8,11 +8,32 @@
 
 .publish-header {
 	display: flex;
-	justify-content: center;
+	justify-content: space-between;
 	align-items: center;
 	padding: 16px 20px;
 	background: #fff;
 	border-bottom: 1px solid var(--border);
+}
+
+.publish-header .back-btn {
+	background: none;
+	border: none;
+	padding: 8px;
+	border-radius: 8px;
+	cursor: pointer;
+	color: #374151;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: background-color 0.2s;
+}
+
+.publish-header .back-btn:hover {
+	background-color: #f3f4f6;
+}
+
+.publish-header .back-btn:active {
+	background-color: #e5e7eb;
 }
 
 .publish-title {
@@ -20,6 +41,12 @@
 	font-size: 22px;
 	font-weight: 600;
 	color: #4a5568;
+	flex: 1;
+	text-align: center;
+}
+
+.publish-header .header-placeholder {
+	width: 36px; /* 与返回按钮宽度相同，保持布局平衡 */
 }
 
 .publish-content {
