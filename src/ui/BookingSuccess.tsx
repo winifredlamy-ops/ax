@@ -11,6 +11,7 @@ const Svg: React.FC<{ path: string; className?: string }> = ({ path, className }
 const IconArrowLeft: React.FC = () => <Svg path="M19 12H5M12 19l-7-7 7-7" />
 const IconUser: React.FC = () => <Svg path="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" />
 const IconMore: React.FC = () => <Svg path="M12 12h.01M12 6h.01M12 18h.01" />
+const IconChevronRight: React.FC = () => <Svg path="M9 18l6-6-6-6" />
 
 export const BookingSuccess: React.FC = () => {
 	const navigate = useNavigate()
@@ -29,8 +30,7 @@ export const BookingSuccess: React.FC = () => {
 	const bookingInfo = {
 		storeName: 'TT网球（南山中心店）',
 		dateTime: '2025年08月13日 星期三 13:00-14:00',
-		course: '1对2导师体验课-室内60分钟',
-		coach: '导师E'
+		course: '1对2导师体验课-室内60分钟'
 	}
 
 	return (
@@ -52,9 +52,9 @@ export const BookingSuccess: React.FC = () => {
 			</div>
 
 			{/* 成功通知卡片 */}
-			<div className="success-card">
+			<div className="success-card" onClick={() => navigate('/order-detail')}>
 				<div className="card-header">
-					<h2 className="success-title">约课成功通知</h2>
+					<h2 className="success-title">发布成功通知</h2>
 					<button className="more-btn">
 						<IconMore />
 					</button>
@@ -73,26 +73,23 @@ export const BookingSuccess: React.FC = () => {
 						<span className="detail-label">预约项目</span>
 						<span className="detail-value">{bookingInfo.course}</span>
 					</div>
-					<div className="detail-row">
-						<span className="detail-label">导师名称</span>
-						<span className="detail-value">{bookingInfo.coach}</span>
-					</div>
 				</div>
-			</div>
 
-			{/* 底部品牌信息 */}
-			<div className="bottom-branding">
-				<div className="brand-info">
-					<div className="brand-icon">
-						<svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-							<circle cx="12" cy="12" r="10" fill="#4ade80"/>
-							<path d="M9 12l2 2 4-4" stroke="white" strokeWidth="2" fill="none"/>
-						</svg>
+				{/* 品牌信息融合到卡片底部 */}
+				<div className="integrated-branding">
+					<div className="brand-info">
+						<div className="brand-icon">
+							<svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+								<circle cx="12" cy="12" r="10" fill="#4ade80"/>
+								<path d="M9 12l2 2 4-4" stroke="white" strokeWidth="2" fill="none"/>
+							</svg>
+						</div>
+						<span className="brand-name">TT网球俱乐部</span>
 					</div>
-					<span className="brand-name">TT网球俱乐部</span>
-				</div>
-				<div className="miniprogram-tag">
-					小程序
+					<div className="miniprogram-section">
+						<span className="miniprogram-tag">小程序</span>
+						<IconChevronRight />
+					</div>
 				</div>
 			</div>
 

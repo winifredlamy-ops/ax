@@ -59,6 +59,17 @@
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.success-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.success-card:active {
+  transform: translateY(0);
 }
 
 .card-header {
@@ -96,7 +107,7 @@
 
 /* 预约详情 */
 .booking-details {
-  padding: 16px 20px 24px;
+  padding: 16px 20px 20px;
 }
 
 .detail-row {
@@ -125,16 +136,14 @@
   font-weight: 500;
 }
 
-/* 底部品牌信息 */
-.bottom-branding {
+/* 融合的品牌信息 */
+.integrated-branding {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px 20px;
-  background: white;
-  margin: 0 16px 30px;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 16px 20px 20px;
+  border-top: 1px solid #f3f4f6;
+  margin-top: 4px;
 }
 
 .brand-info {
@@ -157,6 +166,18 @@
   font-weight: 500;
 }
 
+.miniprogram-section {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.miniprogram-section:hover {
+  opacity: 0.7;
+}
+
 .miniprogram-tag {
   font-size: 12px;
   color: #6b7280;
@@ -164,6 +185,12 @@
   padding: 4px 8px;
   border-radius: 12px;
   font-weight: 500;
+}
+
+.miniprogram-section svg {
+  width: 16px;
+  height: 16px;
+  color: #9ca3af;
 }
 
 
@@ -196,7 +223,7 @@
   }
   
   .booking-details {
-    padding: 12px 16px 20px;
+    padding: 12px 16px 16px;
   }
   
   .detail-row {
@@ -212,10 +239,22 @@
     font-size: 13px;
   }
   
-  .bottom-branding {
-    margin: 0 12px 20px;
-    padding: 12px 16px;
-    border-radius: 8px;
+  .integrated-branding {
+    padding: 12px 16px 16px;
+  }
+  
+  .brand-name {
+    font-size: 13px;
+  }
+  
+  .miniprogram-tag {
+    font-size: 11px;
+    padding: 3px 6px;
+  }
+  
+  .miniprogram-section svg {
+    width: 14px;
+    height: 14px;
   }
   
 }
@@ -244,13 +283,17 @@
     color: #9ca3af;
   }
   
-  .success-card, .bottom-branding {
+  .success-card {
     background: #1f2937;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   }
   
   .card-header {
     border-bottom-color: #374151;
+  }
+  
+  .integrated-branding {
+    border-top-color: #374151;
   }
   
   .success-title {
