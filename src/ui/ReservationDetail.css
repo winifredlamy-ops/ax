@@ -34,8 +34,8 @@
 	background: #f3f4f6;
 }
 
-.header-title {
-	font-size: 18px;
+.order-header .header-title {
+	font-size: 20px !important;
 	font-weight: 600;
 	color: #1f2937;
 	margin: 0;
