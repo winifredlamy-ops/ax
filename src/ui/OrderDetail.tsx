@@ -38,8 +38,8 @@ export const OrderDetail: React.FC = () => {
 	}
 
 	const handleEditReservation = () => {
-		// 跳转到编辑预约页面
-		navigate(`/edit-reservation/${orderInfo.orderId}`)
+		// 跳转到发布课程页面（编辑模式）
+		navigate('/publish')
 	}
 
 	const handleCancelOrder = () => {
