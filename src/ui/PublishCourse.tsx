@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './PublishCourse.css'
+import { useToast } from './Toast'
 
 // 定义场地数据类型
 interface Venue {
@@ -656,6 +657,7 @@ const CoachSelectionField: React.FC<{
 
 export const PublishCourse: React.FC = () => {
 	const navigate = useNavigate()
+	const { showToast, ToastProvider } = useToast()
 	const [selectedDate, setSelectedDate] = useState('')
 	const [selectedTime, setSelectedTime] = useState('')
 	const [selectedStores, setSelectedStores] = useState<string[]>([])
@@ -745,7 +747,8 @@ export const PublishCourse: React.FC = () => {
 	}, [isEditMode, editId])
 	
 	return (
-		<div className="page publish-course">
+		<ToastProvider>
+			<div className="page publish-course">
 			{!isEditMode && (
 				<div className="publish-header">
 					<h1 className="publish-title">发布课程</h1>
@@ -813,7 +816,7 @@ export const PublishCourse: React.FC = () => {
 			</div>
 			
 			<div className="publish-actions">
-				<button className="save-btn" onClick={() => alert('保存')}>
+				<button className="save-btn" onClick={() => showToast('已保存', 'success')}>
 					<IconSave />
 					<span>保存</span>
 				</button>
@@ -823,5 +826,6 @@ export const PublishCourse: React.FC = () => {
 				</button>
 			</div>
 		</div>
+		</ToastProvider>
 	)
 } 

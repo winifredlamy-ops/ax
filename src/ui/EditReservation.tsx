@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import './EditReservation.css'
+import { useToast } from './Toast'
 
 const Svg: React.FC<{ path: string; className?: string }> = ({ path, className }) => (
 	<svg className={className} viewBox="0 0 24 24" width="20" height="20" aria-hidden fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -590,6 +591,7 @@ const CoachSelectionField: React.FC<{
 
 export const EditReservation: React.FC = () => {
 	const navigate = useNavigate()
+	const { showToast, ToastProvider } = useToast()
 	const { id } = useParams()
 	const [selectedDate, setSelectedDate] = useState('')
 	const [selectedSlot, setSelectedSlot] = useState<{ timeSlotId: string, venueId: string } | null>(null)
@@ -672,7 +674,8 @@ export const EditReservation: React.FC = () => {
 	}, [])
 	
 	return (
-		<div className="page publish-course">
+		<ToastProvider>
+			<div className="page publish-course">
 			<div className="publish-content">
 				<CheckboxField 
 					label="网球门店" 
@@ -731,7 +734,7 @@ export const EditReservation: React.FC = () => {
 			</div>
 			
 			<div className="publish-actions">
-				<button className="save-btn" onClick={() => alert('保存')}>
+				<button className="save-btn" onClick={() => showToast('已保存', 'success')}>
 					<IconSave />
 					<span>保存</span>
 				</button>
@@ -741,5 +744,6 @@ export const EditReservation: React.FC = () => {
 				</button>
 			</div>
 		</div>
+		</ToastProvider>
 	)
 } 
