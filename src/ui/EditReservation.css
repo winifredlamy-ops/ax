@@ -1,2 +1,34 @@
 /* EditReservation组件相关样式 */
 /* EditReservation组件复用PublishCourse的样式，无需重复定义 */
+
+/* 顶部导航栏样式 */
+.order-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 16px;
+	background: #fff;
+	border-bottom: 1px solid #f0f0f0;
+}
+
+.back-btn {
+	background: none;
+	border: none;
+	padding: 8px;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #333;
+}
+
+.header-title {
+	font-size: 18px;
+	font-weight: 600;
+	color: #333;
+	margin: 0;
+}
+
+.header-placeholder {
+	width: 40px;
+}

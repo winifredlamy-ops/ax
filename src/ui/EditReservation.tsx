@@ -15,6 +15,7 @@ const IconChevronLeft: React.FC = () => <Svg path="M15 18l-6-6 6-6" />
 const IconChevronRight: React.FC = () => <Svg path="M9 18l6-6-6-6" />
 const IconSave: React.FC = () => <Svg path="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2Z" />
 const IconSend: React.FC = () => <Svg path="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
+const IconArrowLeft: React.FC = () => <Svg path="M19 12H5M12 19l-7-7 7-7" />
 
 const dateOptions = [
 	"08月15日 星期四",
@@ -676,6 +677,15 @@ export const EditReservation: React.FC = () => {
 	return (
 		<ToastProvider>
 			<div className="page publish-course">
+			{/* 顶部导航栏 */}
+			<div className="order-header">
+				<button className="back-btn" onClick={() => navigate(-1)}>
+					<IconArrowLeft />
+				</button>
+				<h1 className="header-title">更改预约</h1>
+				<div className="header-placeholder"></div>
+			</div>
+			
 			<div className="publish-content">
 				<CheckboxField 
 					label="网球门店" 
