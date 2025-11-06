@@ -80,7 +80,6 @@ export const Admin: React.FC = () => {
 					<GridItem icon={<IconPerson />} label="教练管理" onClick={() => alert('教练管理')} />
 					<GridItem icon={<IconPeople />} label="学员管理" onClick={() => alert('学员管理')} />
 					<GridItem icon={<IconCourse />} label="课程管理" onClick={() => alert('课程管理')} />
-					<GridItem icon={<IconReservation />} label="预定管理" onClick={() => navigate('/reservation')} />
 				</Section>
 
 				<Section title="角色管理">
