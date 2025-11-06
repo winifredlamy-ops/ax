@@ -50,7 +50,7 @@
 }
 
 .reservation-content {
-	padding: 12px 4px;
+	padding: 12px 4px 120px;
 	margin-top: 73px; /* 为固定导航栏留出空间 */
 }
 
@@ -61,6 +61,17 @@
 	box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 	margin-bottom: 8px;
 	overflow: hidden;
+	cursor: pointer;
+	transition: all 0.2s;
+}
+
+.reservation-card:hover {
+	box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+	transform: translateY(-2px);
+}
+
+.reservation-card:active {
+	transform: translateY(0);
 }
 
 .card-header {

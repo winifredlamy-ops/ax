@@ -68,9 +68,9 @@ const reservations: Reservation[] = [
 
 const ReservationCard: React.FC<{ reservation: Reservation }> = ({ reservation }) => {
 	const navigate = useNavigate()
-	
+
 	return (
-		<div className="reservation-card">
+		<div className="reservation-card" onClick={() => navigate(`/reservation/${reservation.id}`)}>
 			<div className="card-header">
 				<div className="title-section">
 					<h3 className="card-title">{reservation.title}</h3>
@@ -82,30 +82,25 @@ const ReservationCard: React.FC<{ reservation: Reservation }> = ({ reservation }
 					</button>
 				</div>
 			</div>
-			
+
 			<div className="card-content">
 				<div className="info-row">
 					<IconMapPin />
 					<span className="info-text">{reservation.location}</span>
 				</div>
-				
+
 				{reservation.instructor && (
 					<div className="info-row">
 						<IconPerson />
 						<span className="info-text">{reservation.instructor}</span>
 					</div>
 				)}
-				
-				<div className="card-footer">
-					<button className="details-btn" onClick={() => {
-						navigate(`/reservation/${reservation.id}`)
-					}}>
-						详情
-					</button>
-					{reservation.reviewStatus && (
+
+				{reservation.reviewStatus && (
+					<div className="card-footer">
 						<div className="review-status">待评价</div>
-					)}
-				</div>
+					</div>
+				)}
 			</div>
 		</div>
 	)
@@ -121,7 +116,7 @@ export const ReservationManagement: React.FC = () => {
 				<button className="back-btn" onClick={() => navigate(-1)}>
 					<IconArrowLeft />
 				</button>
-				<h1 className="page-title">我的约课</h1>
+				<h1 className="page-title">课程列表</h1>
 				<div className="header-placeholder"></div>
 			</div>
 			
@@ -129,11 +124,7 @@ export const ReservationManagement: React.FC = () => {
 				{reservations.map(reservation => (
 					<ReservationCard key={reservation.id} reservation={reservation} />
 				))}
-				
-				<div className="more-orders">
-					<button className="more-btn">更多往期订单</button>
-				</div>
-				
+
 				<div className="new-reservation">
 					<button className="new-btn" onClick={() => navigate('/publish')}>
 						<IconPlus />
